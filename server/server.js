@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors')
 const app = express();
+const jwt = require('jsonwebtoken')
 
 require('dotenv').config();
 env = process.env;
@@ -18,7 +19,9 @@ const connection = mysql.createConnection({
   database: env.SQL_DATABASE
 });
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
+  const {seat, bid} = req.body;
+  const query = `CALL InsertSeatNo(${seat}, ${bid})`;
   res.send('Welcome to my server!');
 });
 
