@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
+    <link rel="stylesheet" href="booking.css">
 </head>
 <body>
     <h1> Please select the movie you wish to watch and select the seats</h1>
     <main>
-        <section>
+        <section id="booking">
             <p> Select the movie you wish to watch</p>
             <br>
             <select name="movie">
@@ -19,21 +20,36 @@
                 <option value="Barbie">Barbie</option>
             </select>
         </section>
-        <section>
+        <section id="booking2">
             <p>Enter the number of seats you want to book</p>
-            <br> <br>
+            <br> 
             <input type="text" placeholder="Number of seats">
             <br>
             <img src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340"/>
             <br>
-            <p>Enter the seat you want</p>
+            <p>Enter the seat you want:</p>
+            <br>
             <input type="text" placeholder="seat type">
             <br>
+            <p>Enter the day you want to watch the movie:</P>
             <br>
-            <input type="submit" value="submit">        
+            <input type="text" placeholder="date">
+            <br>
+            <p>Select your show timing:</p>
+            <br>
+            <select name="timing">
+                <option value="09:15">09:15</option>
+                <option value="12:00">12:00</option>
+                <option value="15:30">15:30</option>
+                <option value="19:00">19:00</option>
+                <option value="23:00">23:00</option>
+            </select>
+            <br>
+            <br>
+            <input type="submit" value="submit" id="submit">        
         </section>
 
-        <section>
+        <section id="payment">
             <p>Please select your method of payment</p>
             <br>
             <p><b>Card:</b><a href="/card.html">Card</a></p>
