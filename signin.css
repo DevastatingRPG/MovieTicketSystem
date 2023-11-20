@@ -1,0 +1,41 @@
+h1{
+    color:aliceblue ;
+    background-color:#f83A44;
+    width: 450px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body{
+    background-color: snow;
+}
+
+#signin{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: #ff8370;
+    font-weight: lighter;
+    border: 2px solid #f83A44;
+}
+
+#submit{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#submit:hover{
+    background-color: brown;
+}
+
+#login{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 1300px;
+    border: 2px solid dimgray;
+    background-color: aliceblue;
+}
+
+footer{
+    position: absolute;
+    background-color: dimgray;
+}
+
+a{
+    text-decoration: none;
+}
