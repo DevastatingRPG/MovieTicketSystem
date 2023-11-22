@@ -1,5 +1,6 @@
 body{
     background-color: snow;
+    background-image: url(https://images.unsplash.com/photo-1543536448-d209d2d13a1c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fG1vdmllfGVufDB8fDB8fHww);
 }
 
 h1{
@@ -10,17 +11,22 @@ h1{
 }
 
 #booking{
+    color: azure;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: #ff8370;
-    font-weight: lighter;
+    font-weight: bolder;
     border: 2px solid #f83A44;
+    background-image:url(https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1450&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) ;
+    background-size: contain;
 }
 
 #booking2{
+    background-image: url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: #ff8370;
     font-weight: lighter;
     border: 2px solid #f83A44;
+    color: azure;
 }
 
 #submit{
@@ -32,8 +38,10 @@ h1{
 }
 
 #payment{
+    background-image: url(https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bW92aWV8ZW58MHx8MHx8fDA%3D);
     font-family: Arial, Helvetica, sans-serif;
     width: 1300px;
     border: 2px solid dimgray;
     background-color: aliceblue;
+    color:azure;
 }
