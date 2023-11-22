@@ -1,15 +1,20 @@
 h1{
     color:aliceblue ;
+    text-align: center;
     background-color: #f83a44;
     width: 450px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 main{
+    text-align: center;
+    margin: left 400px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: #ff8370;
     font-weight: lighter;
     border: 2px solid #f83A44;
+    background-image: url(https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fG1vdmllfGVufDB8fDB8fHww);
+    background-size: contain;
 }
 
 #submit{
@@ -22,6 +27,7 @@ main{
 
 body{
     background-color: snow;
+    background-image: url(https://images.unsplash.com/photo-1543536448-d209d2d13a1c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fG1vdmllfGVufDB8fDB8fHww);
 }
 
 footer{
