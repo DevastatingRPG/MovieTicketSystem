@@ -20,8 +20,30 @@ const connection = mysql.createConnection({
   multipleStatements: true,
 });
 
-app.get('/admin', (req, res) => {
+app.post('/admin', (req, res) => {
+  let query;
   const {func} = req.query;
+  const { vid, city, pincode, location, vtype, avail,
+          sid, name, producer, stype, timing, lead } = req.body;
+  switch (func){
+    case 'insvenue':
+      query = `CALL InsertVenue
+      (${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
+      break;
+    case 'insshow':
+      query = `CALL InsertShow
+      (${sid}, \'${name}\', \'${producer}\', \'${stype}\', \'${timing}\', \'${lead}\')`;
+      break;
+  }
+  
+  connection.query(query, (err, rows, fields) => {
+    if (err){
+      console.error(err);
+      res.sendStatus(403);
+    }
+    res.send(rows[0][0]);
+  })
+  
   
 })
 
@@ -30,8 +52,8 @@ app.get('/booking', (req, res) => {
   let avail, error;
   const query = `CALL Show_Availability(${sid}, ${vid}, @avail, @error); SELECT @avail`;
   connection.query(query, (err, rows, fields) => {
-    if (error){
-      console.error(error);
+    if (err){
+      console.error(err);
       res.sendStatus(403);
     }
     res.send(rows[0][0]);
