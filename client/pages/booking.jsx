@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'styles/booking.css';
 import Layout from '../components/layout';
 import 'styles/navbar.css';
+import { fetchData } from '@/utilities/fetching';
 import Navbar from '@/components/navbar';
 import seats from '../components/seats'
 import Seats from '../components/seats';
 
 function BookingForm() {
   // Placeholder movie data until fetched from the backend
+  const [list, setList] = useState(null)
+
+  useEffect(() => {
+    // Fetch movie data from the backend server
+    const getList = async () => {
+      const response = await fetchData('/booking?func=list');
+      setList(response)
+    }
+
+    getList()
+
+  }, []);
+
   const initialMovies = [
     {
       id: 1,
