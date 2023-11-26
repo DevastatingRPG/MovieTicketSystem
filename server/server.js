@@ -85,17 +85,15 @@ app.get('/booking', (req, res) => {
 
 app.post('/booking', (req, res) => {
   const { func } = req.query;
-  const { uid, sid, pmeth, date, amount, stat, seat } = req.body;
+  const { uid, sid, pmeth, amount, stat, seat } = req.body;
   switch (func) {
     case 'insert':
       query = `
-      CALL InsertBooking(${uid}, ${sid}, ${pmeth}, ${date}, ${amount}, ${stat}, @bid);
+      CALL InsertBooking(${uid}, ${sid}, ${pmeth}, ${amount}, ${stat}, @bid);
       CALL InsertSeatNo(${seat}, @bid)`;
       break;
   }
 
-
-  const query = `CALL InsertSeatNo(${seat}, ${bid})`;
   connection.query(query, (err, rows, fields) => {
     if (err) {
       console.error(err);
