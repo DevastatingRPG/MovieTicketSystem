@@ -22,6 +22,7 @@ function BookingForm() {
 
   }, []);
 
+
   const initialMovies = [
     {
       id: 1,
@@ -75,7 +76,27 @@ function BookingForm() {
   const [selectedTiming, setSelectedTiming] = useState('');
   const [showTimings, setShowTimings] = useState(initialShowTimings);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+  const [selectedVenue, setSelectedVenue] = useState('');
   const paymentMethods = ['Card', 'UPI'];
+
+  const [seats, setSeats] = useState([]);
+  useEffect(() => {
+    const getSeats = async () => {
+      try {
+        if (selectedMovie != '' && selectedVenue != '') {
+          const response = await fetchData(`/booking?func=occupied&sid=${selectedMovie}&vid=${selectedVenue}`);
+          setSeats(response.data);
+        }
+
+      }
+      catch (err) {
+        console.error("Error fetching unoccupied seats : ", err);
+      }
+    }
+
+    getSeats();
+
+  }, [selectedMovie, selectedVenue])
 
   const handlePaymentMethodChange = (e) => {
     setSelectedPaymentMethod(e.target.value);
@@ -107,6 +128,7 @@ function BookingForm() {
 
     // You can add additional logic here, such as sending the data to a server
   };
+
 
   return (
     <Layout>
@@ -141,10 +163,7 @@ function BookingForm() {
             />
             <br />
             <p>Enter the seat you want:</p>
-            <img
-              src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340"
-              alt="seating"
-            />
+            <Seats occupiedSeats={seats}></Seats>
             <br />
             <br />
             <input type="text" placeholder="Seat type" />
