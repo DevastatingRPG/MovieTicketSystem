@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "client/app/layout.jsx", "pages/index.jsx", "components/deleteShow.jsx", "components/deleteVenue.jsx", "components/footer.jsx", "components/header.jsx", "components/insertShow.jsx", "components/insertVenue.jsx", "components/layout.jsx", "components/navbar.jsx", "pages/signup.jsx", "pages/movies.jsx", "pages/login.jsx", "pages/booking.jsx", "pages/admin.jsx"],
+  "exclude": ["node_modules"]
+}
