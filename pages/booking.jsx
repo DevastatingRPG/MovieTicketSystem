@@ -3,6 +3,8 @@ import 'styles/booking.css';
 import Layout from '../components/layout';
 import 'styles/navbar.css';
 import Navbar from '@/components/navbar';
+import seats from '../components/seats'
+import Seats from '../components/seats';
 
 function BookingForm() {
   // Placeholder movie data until fetched from the backend
@@ -115,7 +117,6 @@ function BookingForm() {
               ))}
             </select>
           </section>
-
           <section id="booking2">
             <p>Enter the number of seats you want to book</p>
             <input
