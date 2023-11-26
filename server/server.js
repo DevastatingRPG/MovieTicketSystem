@@ -84,6 +84,16 @@ app.get('/booking', (req, res) => {
         res.send(rows);
       })
       break;
+    case 'occupied':
+      query = `CALL GetOccupiedSeats(${sid}, ${vid}, @occupied); SELECT @occupied;`;
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          console.error(err);
+          res.sendStatus(403);
+        }
+        res.send(rows[1][0]["@occupied"]);
+      })
+      break;
   }
 
 })
