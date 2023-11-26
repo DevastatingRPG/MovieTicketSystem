@@ -1,0 +1,100 @@
+/* index.css */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* navbar.css */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container {
+  display: flex;
+}
+
+.navbar-left {
+  /* Styles for the left side of the navbar, if needed */
+}
+
+.navbar-right ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right h1 {
+  margin: 0;
+  margin-right: 20px;
+}
+
+#logo a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-right li {
+  margin-right: 20px;
+}
+
+#main-title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px; /* Adjust the height as needed */
+}
+
+#img img {
+  max-width: 100%; /* Ensure the image doesn't exceed its container */
+  max-height: 100%; /* Ensure the image doesn't exceed its container */
+}
+
+h1 {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #333;
+}
+
+footer p {
+  margin: 0;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+u{
+  text-decoration: none;
+
+}
