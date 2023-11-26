@@ -3,6 +3,7 @@ import 'styles/movies.css';
 import Layout from '../components/layout';
 import 'styles/navbar.css';
 import Navbar from '@/components/navbar';
+import { fetchData } from '@/utilities/fetching';
 
 function MoviesList() {
   // Placeholder movie data until fetched from the backend
@@ -26,10 +27,14 @@ function MoviesList() {
 
   useEffect(() => {
     // Fetch movie data from the backend server
-    fetch('your_backend_api_endpoint') // Replace 'your_backend_api_endpoint' with the actual endpoint
-      .then(response => response.json())
-      .then(data => setMovies(data))
-      .catch(error => console.error('Error fetching movies:', error));
+    const getMovies = async () => {
+      const response = await fetchData('/movies');
+      setMovies(response)
+      console.log(response);
+    }
+
+    getMovies()
+
   }, []); // The empty dependency array ensures that this effect runs once after the initial render
 
   return (
@@ -37,14 +42,14 @@ function MoviesList() {
       <div>
         <h1>Currently available movies:</h1>
         {movies.map(movie => (
-          <div key={movie.id}>
+          <div key={movie.sid}>
             <p>
-              <b>{movie.title}</b>
+              <b>{movie.name}</b>
             </p>
             <p>Click on the picture to view the trailer:</p>
             <br />
-            <a href={movie.trailerLink} target="_main">
-              <img src={movie.imageUrl} height="300px" alt={movie.title} />
+            <a href={movie.trailer} target="_main">
+              <img src={movie.image} height="300px" alt={movie.name} />
             </a>
             <br />
           </div>

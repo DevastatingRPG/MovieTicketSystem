@@ -1,4 +1,5 @@
 // components/DeleteShow.js
+import { postData } from '@/utilities/fetching';
 import React, { useState } from 'react';
 
 export default function DeleteShow() {
@@ -6,10 +7,14 @@ export default function DeleteShow() {
   const [showId, setShowId] = useState('');
 
   // Function to handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Log the input value to the console
-    console.log('Show ID:', showId);
-
+    try {
+      const response = await postData('/admin?func=delshow', { sid: showId });
+    }
+    catch (err) {
+      console.error("Error Deleting Show : ", err)
+    }
     // You can add additional logic here, such as sending the data to a server
   };
 
@@ -26,7 +31,7 @@ export default function DeleteShow() {
         />
         <br />
         <br />
-        {/* <input type="submit" value="Submit" onClick={handleSubmit} /> */}
+        <input type="submit" value="Submit" onClick={handleSubmit} />
       </section>
     </div>
   );

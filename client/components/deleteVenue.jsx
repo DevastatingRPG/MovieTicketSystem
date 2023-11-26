@@ -1,15 +1,20 @@
 // components/DeleteVenue.js
 import React, { useState } from 'react';
+import { postData } from '@/utilities/fetching';
 
 export default function DeleteVenue() {
   // State variable to manage the input value
   const [venueId, setVenueId] = useState('');
 
   // Function to handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Log the input value to the console
-    console.log('Venue ID:', venueId);
-
+    try {
+      const response = await postData('/admin?func=delvenue', { vid: venueId });
+    }
+    catch (err) {
+      console.error("Error Deleting Venue : ", err)
+    }
     // You can add additional logic here, such as sending the data to a server
   };
 
@@ -25,7 +30,7 @@ export default function DeleteVenue() {
           onChange={(e) => setVenueId(e.target.value)}
         />
         <br />
-        {/* <input type="submit" value="Submit" onClick={handleSubmit} /> */}
+        <input type="submit" value="Submit" onClick={handleSubmit} />
       </section>
     </div>
   );

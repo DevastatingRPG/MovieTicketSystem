@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'styles/index.css';
 import 'styles/navbar.css';
 import Layout from '@/components/layout';
 import Navbar from '@/components/navbar';
+import { fetchData } from '../utilities/fetching'
 
 function MovieTicketBookingSystem() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const test = async () => {
+      try {
+        let response = await fetchData('/booking?func=list');
+        setData(response);
+        console.log(data);
+      }
+      catch (err) {
+        console.error(err);
+      }
+    }
+
+    test()
+    
+  }, [])
+
+  console.log(data)
+
   return (
     <Layout>
       <div>
@@ -22,7 +43,7 @@ function MovieTicketBookingSystem() {
           </section>
           <br />
           <section id="img">
-            <img src="" height="500px" alt="Movie Poster" /> 
+            <img src="" height="500px" alt="Movie Poster" />
           </section>
           <br />
         </main>
