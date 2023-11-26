@@ -1,34 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'styles/admin.css';
 import 'styles/navbar.css'
 import Layout from '../components/layout';
 import Navbar from '../components/navbar';
+import InsertVenue from '@/components/insertVenue';
+import InsertShow from '@/components/insertShow';
+import DeleteShow from '@/components/deleteShow';
+import DeleteVenue from '@/components/deleteVenue';
+import styles from '../styles/AdminPage.module.css'
 
 function Admin() {
+
+  const [functionType, setFunctionType] = useState('');
+
   return (
     <Layout>
-      <div>
+      <div className={styles.AdminPage}>
         <h1>Welcome Admin</h1>
         <main>
-          <section id="admin-movies">
-            <p>Please enter the movies you want to delete:</p>
-            <input type="text" placeholder=" Delete Movies" />
-            <br />
-            <br />
-            <p>Please enter the movies you want to add:</p>
-            <input type="text" placeholder="Add Movies" />
-            <br />
-          </section>
-          <section id="admin-venues">
-            <br />
-            <p>Please enter the venue you want to delete:</p>
-            <input type="text" placeholder=" Delete Venue" />
-            <br />
-            <br />
-            <p>Please enter the venue you want to add:</p>
-            <input type="text" placeholder="Add Venue" />
-            <br />
-          </section>
+          <select onChange={(e) => setFunctionType(e.target.value)}>
+            <option value="">Select function</option>
+            <option value="insertVenue">Insert Venue</option>
+            <option value="insertShow">Insert Show</option>
+            <option value="deleteVenue">Delete Venue</option>
+            <option value="deleteShow">Delete Show</option>
+          </select>
+          {functionType === 'insertVenue' && <InsertVenue />}
+          {functionType === 'insertShow' && <InsertShow />}
+          {functionType === 'deleteVenue' && <DeleteVenue />}
+          {functionType === 'deleteShow' && <DeleteShow />}
           <br />
           <input type="submit" value="Submit" id="admin-submit" />
         </main>
