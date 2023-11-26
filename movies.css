@@ -9,6 +9,7 @@ h1{
 body{
     background-color: snow;
     background-image: url(https://images.unsplash.com/photo-1543536448-d209d2d13a1c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fG1vdmllfGVufDB8fDB8fHww);
+    text-align:center;
 }
 
 main{
