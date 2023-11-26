@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './movies.css';
+import 'styles/movies.css';
 import Layout from '../components/layout';
-import './navbar.css';
+import 'styles/navbar.css';
+import Navbar from '@/components/navbar';
 
 function MoviesList() {
   // Placeholder movie data until fetched from the backend
@@ -34,26 +35,23 @@ function MoviesList() {
   return (
     <Layout>
       <div>
-      <header>
-      </header>
         <h1>Currently available movies:</h1>
-        <main>
-          {movies.map(movie => (
-            <div key={movie.id}>
-              <p>
-                <b>{movie.title}</b>
-              </p>
-              <p>Click on the picture to view the trailer:</p>
-              <br />
-              <a href={movie.trailerLink} target="_main">
-                <img src={movie.imageUrl} height="300px" alt={movie.title} />
-              </a>
-              <br />
-            </div>
-          ))}
-        </main>
+        {movies.map(movie => (
+          <div key={movie.id}>
+            <p>
+              <b>{movie.title}</b>
+            </p>
+            <p>Click on the picture to view the trailer:</p>
+            <br />
+            <a href={movie.trailerLink} target="_main">
+              <img src={movie.imageUrl} height="300px" alt={movie.title} />
+            </a>
+            <br />
+          </div>
+        ))}
         <div>
           <p>Click here to proceed with booking</p>
+          <br></br>
           <a href="booking">Bookings</a>
         </div>
       </div>

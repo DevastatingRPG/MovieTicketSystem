@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './signup.css';
+import 'styles/signup.css';
 import Layout from '../components/layout';
-import Navbar from '@/components/navbar';
+import Navbar from '../components/navbar';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -40,8 +40,7 @@ function SignUp() {
                 placeholder="Enter Name"
                 name="name"
                 value={formData.name}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
               <br />
               <br />
               <p>Enter your email:</p>
@@ -50,8 +49,7 @@ function SignUp() {
                 placeholder="Enter email"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
               <br />
               <br />
               <p>Set password:</p>
@@ -60,8 +58,7 @@ function SignUp() {
                 placeholder="Enter password"
                 name="password"
                 value={formData.password}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
               <br />
               <br />
               <p>Enter your age:</p>
@@ -70,8 +67,7 @@ function SignUp() {
                 placeholder="Enter Age"
                 name="age"
                 value={formData.age}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
               <br />
               <br />
               <p>Enter your contact number:</p>
@@ -80,8 +76,7 @@ function SignUp() {
                 placeholder="Enter contact"
                 name="contact"
                 value={formData.contact}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
               <br />
               <br />
               <p>Select your gender:</p>

@@ -22,9 +22,6 @@ header {
   display: flex;
 }
 
-.navbar-left {
-  /* Styles for the left side of the navbar, if needed */
-}
 
 .navbar-right ul {
   list-style: none;
@@ -35,11 +32,6 @@ header {
 .navbar-right h1 {
   margin: 0;
   margin-right: 20px;
-}
-
-#logo a {
-  color: #fff;
-  text-decoration: none;
 }
 
 .navbar-right li {

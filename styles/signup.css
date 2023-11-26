@@ -1,6 +1,9 @@
 body {
     background-color: #f0f0f0;
     font-family: 'Arial', sans-serif;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
   
   h1 {
@@ -15,7 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 20px;
+
   }
   
   #signin {
@@ -88,3 +91,34 @@ body {
     }
   }
   
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-container {
+    display: flex;
+  }
+  
+  
+  .navbar-right ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-right h1 {
+    margin: 0;
+    margin-right: 20px;
+  }
+  
+  .navbar-right li {
+    margin-right: 20px;
+  }

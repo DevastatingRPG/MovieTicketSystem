@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './booking.css';
+import 'styles/booking.css';
 import Layout from '../components/layout';
-import Link from 'next/link';
-import './navbar.css';
+import 'styles/navbar.css';
+import Navbar from '@/components/navbar';
 
 function BookingForm() {
   // Placeholder movie data until fetched from the backend
@@ -66,9 +66,9 @@ function BookingForm() {
   
 
   return (
-    <Layout>
+  <Layout>
       <div>
-      <header>
+        <header>
         </header>
         <h1>Select the movie you wish to watch and select the seats</h1>
         <main>
@@ -96,19 +96,18 @@ function BookingForm() {
               type="text"
               placeholder="Number of seats"
               value={numberOfSeats}
-              onChange={e => setNumberOfSeats(e.target.value)}
-            />
-          <br />
-          <p>Enter the seat you want:</p>
-          <img src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340" alt="seating"/>
-          <br/>
-          <br/>
-          <input type="text" placeholder="Seat type" />
-          <br />
-          <p>Enter the date you want to watch the movie:</p>
-          <input type="text" placeholder="Date" />
-          <br />
-          <p>Select your show timing:</p>
+              onChange={e => setNumberOfSeats(e.target.value)} />
+            <br />
+            <p>Enter the seat you want:</p>
+            <img src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340" alt="seating" />
+            <br />
+            <br />
+            <input type="text" placeholder="Seat type" />
+            <br />
+            <p>Enter the date you want to watch the movie:</p>
+            <input type="text" placeholder="Date" />
+            <br />
+            <p>Select your show timing:</p>
             <select
               name="timing"
               value={selectedTiming}
@@ -149,34 +148,34 @@ function BookingForm() {
             {selectedPaymentMethod && (
               <div>
                 {selectedPaymentMethod === 'Card' && (
-                <div>
-                <label htmlFor="cardNumber">Card Number:</label>
-                <input type="text" id="cardNumber" name="cardNumber" />
-                <label htmlFor="cardHolderName">Card Holder Name:</label>
-                <input type="text" id="cardHolderName" name="cardHolderName" />
-                <label htmlFor="expirationDate">Expiration Date:</label>
-                <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YYYY" />
-                <label htmlFor="cvv">CVV:</label>
-                <input type="text" id="cvv" name="cvv" />
-                <br/>
-                <br/>
-                <button type="button">Submit Payment</button>
-                </div>
+                  <div>
+                    <label htmlFor="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" />
+                    <label htmlFor="cardHolderName">Card Holder Name:</label>
+                    <input type="text" id="cardHolderName" name="cardHolderName" />
+                    <label htmlFor="expirationDate">Expiration Date:</label>
+                    <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YYYY" />
+                    <label htmlFor="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" />
+                    <br />
+                    <br />
+                    <button type="button">Submit Payment</button>
+                  </div>
                 )}
                 {selectedPaymentMethod === 'UPI' && (
                   <div>
                     <label htmlFor="upiID">UPI ID:</label>
                     <input type="text" id="upiID" name="upiID" />
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     <button type="button">Submit Payment</button>
                   </div>
                 )}
               </div>
             )}
           </section>
-      </main>
-    </div>
+        </main>
+      </div>
     </Layout>
   );
 }

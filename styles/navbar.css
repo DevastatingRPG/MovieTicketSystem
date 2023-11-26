@@ -43,3 +43,35 @@ header {
   background-color: azure;
   color: black; /* Darker background on hover */
 }
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container {
+  display: flex;
+}
+
+
+.navbar-right ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right h1 {
+  margin: 0;
+  margin-right: 20px;
+}
+
+.navbar-right li {
+  margin-right: 20px;
+}

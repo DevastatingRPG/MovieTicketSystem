@@ -9,16 +9,15 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
-    <Navbar/>
-        <title>Movie Ticket Booking</title>
-        <meta name="description" content="Mini Project" />
+    <><Navbar /><div>
+      <title>Movie Ticket Booking</title>
+      <meta name="description" content="Mini Project" />
       {/* Use children prop to render the main content of the page */}
       <main>
         {children}
       </main>
-      <Footer/>
-    </div>
+      <Footer />
+    </div></>
   );
 };
 
