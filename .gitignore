@@ -38,3 +38,5 @@ next-env.d.ts
 node_modules
 server/node_modules
 server/.env
+client/node_modules
+client/.next
