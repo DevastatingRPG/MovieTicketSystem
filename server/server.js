@@ -48,38 +48,63 @@ app.post('/admin', (req, res) => {
 })
 
 app.get('/booking', (req, res) => {
-  const { func, sid, vid } = req.query;
-  const query = `CALL Show_Availability(${sid}, ${vid}, @avail, @error); SELECT @avail, @error`;
+  const { func, uid, sid, vid } = req.query;
+  let query;
+  switch (func) {
+    case 'avail':
+      query = `CALL Show_Availability(${sid}, ${vid}, @avail, @error); SELECT @avail, @error`;
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          console.error(err);
+          res.sendStatus(403);
+        }
+        let result = rows[1][0]
+        let avail = result["@avail"];
+        let error = result["@error"];
+        if (error) {
+          res.send(error);
+        }
+        else {
+          res.send(avail);
+        }
+      })
+      break;
+    case 'list':
+      query = 'SELECT * FROM event_location; SELECT * FROM venue; SELECT * FROM shows;';
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          console.error(err);
+          res.sendStatus(403);
+        }
+        res.send(rows);
+      })
+      break;
+  }
+
+})
+
+app.post('/booking', (req, res) => {
+  const { func } = req.query;
+  const { uid, sid, pmeth, date, amount, stat, seat } = req.body;
+  switch (func) {
+    case 'insert':
+      query = `
+      CALL InsertBooking(${uid}, ${sid}, ${pmeth}, ${date}, ${amount}, ${stat}, @bid);
+      CALL InsertSeatNo(${seat}, @bid)`;
+      break;
+  }
+
+
+  const query = `CALL InsertSeatNo(${seat}, ${bid})`;
   connection.query(query, (err, rows, fields) => {
     if (err) {
       console.error(err);
       res.sendStatus(403);
     }
-    let result = rows[1][0]
-    let avail = result["@avail"];
-    let error = result["@error"];
-    if (error){
-      res.send(error)
-    }
-    else{
-      res.send(avail)
-    }
+    res.sendStatus(200);
   })
-})
 
-// app.post('/booking', (req, res) => {
-//   const {func} = req.query;
-//   const {seat, bid} = req.body;
-//   const query = `CALL InsertSeatNo(${seat}, ${bid})`;
-//   connection.query(query, (err, rows, fields) => {
-//     if (err){
-//       console.error(err);
-//       res.sendStatus(403);
-//     }
-//     res.sendStatus(200);
-//   })
-
-// });
+});
 
 app.post('/login', (req, res) => {
   const { uid, password } = req.body;
