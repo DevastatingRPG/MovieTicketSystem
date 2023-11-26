@@ -70,7 +70,7 @@ app.get('/booking', (req, res) => {
       })
       break;
     case 'list':
-      query = 'SELECT * FROM event_location; SELECT * FROM venue; SELECT * FROM shows;';
+      query = 'SELECT * FROM event_location; SELECT VID, location FROM venue; SELECT SID, name FROM shows;';
       connection.query(query, (err, rows, fields) => {
         if (err) {
           console.error(err);
