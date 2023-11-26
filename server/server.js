@@ -25,14 +25,19 @@ app.post('/admin', (req, res) => {
   const { func } = req.query;
   const { vid, city, pincode, location, vtype, avail,
     sid, name, producer, stype, timing, lead } = req.body;
+  // Stype is category'Action\',_utf8mb4\'Drama\',_utf8mb4\'Comedy\',_utf8mb4\'Thriller\',_utf8mb4\'Other\
   switch (func) {
     case 'insvenue':
-      query = `CALL InsertVenue
-      (${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
+      query = `CALL InsertVenue(${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
       break;
     case 'insshow':
-      query = `CALL InsertShow
-      (${sid}, \'${name}\', \'${producer}\', \'${stype}\', \'${timing}\', \'${lead}\')`;
+      query = `CALL InsertShow(${sid}, \'${name}\', \'${producer}\', \'${stype}\', \'${timing}\', \'${lead}\')`;
+      break;
+    case 'delvenue':
+      query = `DELETE FROM venue WHERE vid=${vid}`;
+      break;
+    case 'delshow':
+      query = `DELETE FROM shows WHERE sid=${sid}`;
       break;
   }
 
@@ -41,7 +46,7 @@ app.post('/admin', (req, res) => {
       console.error(err);
       res.sendStatus(403);
     }
-    res.send(rows[0][0]);
+    res.sendStatus(200);
   })
 
 

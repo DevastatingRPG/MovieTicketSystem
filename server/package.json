@@ -13,7 +13,7 @@
   "description": "Handles SQL queries",
   "scripts": {
     "start": "node server.js",
-    "devstart": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
