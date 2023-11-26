@@ -22,10 +22,10 @@ const connection = mysql.createConnection({
 
 app.post('/admin', (req, res) => {
   let query;
-  const {func} = req.query;
+  const { func } = req.query;
   const { vid, city, pincode, location, vtype, avail,
-          sid, name, producer, stype, timing, lead } = req.body;
-  switch (func){
+    sid, name, producer, stype, timing, lead } = req.body;
+  switch (func) {
     case 'insvenue':
       query = `CALL InsertVenue
       (${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
@@ -35,54 +35,64 @@ app.post('/admin', (req, res) => {
       (${sid}, \'${name}\', \'${producer}\', \'${stype}\', \'${timing}\', \'${lead}\')`;
       break;
   }
-  
+
   connection.query(query, (err, rows, fields) => {
-    if (err){
+    if (err) {
       console.error(err);
       res.sendStatus(403);
     }
     res.send(rows[0][0]);
   })
-  
-  
+
+
 })
 
 app.get('/booking', (req, res) => {
-  const {func, sid, vid} = req.query;
-  let avail, error;
-  const query = `CALL Show_Availability(${sid}, ${vid}, @avail, @error); SELECT @avail`;
+  const { func, sid, vid } = req.query;
+  const query = `CALL Show_Availability(${sid}, ${vid}, @avail, @error); SELECT @avail, @error`;
   connection.query(query, (err, rows, fields) => {
-    if (err){
+    if (err) {
       console.error(err);
       res.sendStatus(403);
     }
-    res.send(rows[0][0]);
+    let result = rows[1][0]
+    let avail = result["@avail"];
+    let error = result["@error"];
+    if (error){
+      res.send(error)
+    }
+    else{
+      res.send(avail)
+    }
   })
 })
 
-app.post('/booking', (req, res) => {
-  const {func} = req.query;
-  const {seat, bid} = req.body;
-  const query = `CALL InsertSeatNo(${seat}, ${bid})`;
-  connection.query(query, (err, rows, fields) => {
-    if (err){
-      console.error(err);
-      res.sendStatus(403);
-    }
-    res.sendStatus(200);
-  })
-  
-});
+// app.post('/booking', (req, res) => {
+//   const {func} = req.query;
+//   const {seat, bid} = req.body;
+//   const query = `CALL InsertSeatNo(${seat}, ${bid})`;
+//   connection.query(query, (err, rows, fields) => {
+//     if (err){
+//       console.error(err);
+//       res.sendStatus(403);
+//     }
+//     res.sendStatus(200);
+//   })
+
+// });
 
 app.post('/login', (req, res) => {
-  const {uid, password } = req.body;
+  const { uid, password } = req.body;
   const query = `CALL VerifyUserCredentials(\'${uid}\', \'${password}\', @verified, @error); SELECT @verified, @error;`;
   connection.query(query, (err, rows, fields) => {
-    if (err){
+    if (err) {
       console.error(err);
       res.sendStatus(403);
     }
-    res.send(rows[1][0]);
+    let result = rows[1][0];
+    let verified = result["@verified"];
+    let error = result["@error"];
+    res.send(error);
   })
 })
 
@@ -91,7 +101,7 @@ app.post('/register', (req, res) => {
   const query = `CALL InsertUser(\'${name}\', \'${email}\', ${age}, 
   \'${gender}\', ${mobile}, \'${uname}\', \'${password}\')`;
   connection.query(query, (err, rows, fields) => {
-    if (err){
+    if (err) {
       console.error(err);
       res.sendStatus(409);
     }
