@@ -60,16 +60,42 @@ function BookingForm() {
   const [showTimings, setShowTimings] = useState(initialShowTimings);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
   const paymentMethods = ['Card', 'UPI'];
-  const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+
+  const handlePaymentMethodChange = (e) => {
     setSelectedPaymentMethod(e.target.value);
   };
-  
+
+  const handlePaymentSubmit = () => {
+    // Log the input values to the console
+    console.log('Selected Movie:', selectedMovie);
+    console.log('Number of Seats:', numberOfSeats);
+    console.log('Selected Seat:', selectedSeat);
+    console.log('Selected Date:', selectedDate);
+    console.log('Selected Timing:', selectedTiming);
+    console.log('Selected Payment Method:', selectedPaymentMethod);
+
+    if (selectedPaymentMethod === 'Card') {
+      const cardNumber = document.getElementById('cardNumber').value;
+      const cardHolderName = document.getElementById('cardHolderName').value;
+      const expirationDate = document.getElementById('expirationDate').value;
+      const cvv = document.getElementById('cvv').value;
+
+      console.log('Card Number:', cardNumber);
+      console.log('Card Holder Name:', cardHolderName);
+      console.log('Expiration Date:', expirationDate);
+      console.log('CVV:', cvv);
+    } else if (selectedPaymentMethod === 'UPI') {
+      const upiID = document.getElementById('upiID').value;
+      console.log('UPI ID:', upiID);
+    }
+
+    // You can add additional logic here, such as sending the data to a server
+  };
 
   return (
-  <Layout>
+    <Layout>
       <div>
-        <header>
-        </header>
+        <header></header>
         <h1>Select the movie you wish to watch and select the seats</h1>
         <main>
           <section id="booking">
@@ -77,12 +103,12 @@ function BookingForm() {
             <select
               name="movie"
               value={selectedMovie}
-              onChange={e => setSelectedMovie(e.target.value)}
+              onChange={(e) => setSelectedMovie(e.target.value)}
             >
               <option value="" disabled>
                 Select a movie
               </option>
-              {initialMovies.map(movie => (
+              {initialMovies.map((movie) => (
                 <option key={movie.id} value={movie.title}>
                   {movie.title}
                 </option>
@@ -96,27 +122,36 @@ function BookingForm() {
               type="text"
               placeholder="Number of seats"
               value={numberOfSeats}
-              onChange={e => setNumberOfSeats(e.target.value)} />
+              onChange={(e) => setNumberOfSeats(e.target.value)}
+            />
             <br />
             <p>Enter the seat you want:</p>
-            <img src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340" alt="seating" />
+            <img
+              src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340"
+              alt="seating"
+            />
             <br />
             <br />
             <input type="text" placeholder="Seat type" />
             <br />
             <p>Enter the date you want to watch the movie:</p>
-            <input type="text" placeholder="Date" />
+            <input
+              type="text"
+              placeholder="Date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+            />
             <br />
             <p>Select your show timing:</p>
             <select
               name="timing"
               value={selectedTiming}
-              onChange={e => setSelectedTiming(e.target.value)}
+              onChange={(e) => setSelectedTiming(e.target.value)}
             >
               <option value="" disabled>
                 Select a timing
               </option>
-              {showTimings.map(timing => (
+              {showTimings.map((timing) => (
                 <option key={timing.id} value={timing.time}>
                   {timing.time}
                 </option>
@@ -124,7 +159,6 @@ function BookingForm() {
             </select>
             <br />
             <br />
-            {/* <input type="submit" value="Submit" id="submit" /> */}
           </section>
 
           <section id="payment">
@@ -154,12 +188,19 @@ function BookingForm() {
                     <label htmlFor="cardHolderName">Card Holder Name:</label>
                     <input type="text" id="cardHolderName" name="cardHolderName" />
                     <label htmlFor="expirationDate">Expiration Date:</label>
-                    <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YYYY" />
+                    <input
+                      type="text"
+                      id="expirationDate"
+                      name="expirationDate"
+                      placeholder="MM/YYYY"
+                    />
                     <label htmlFor="cvv">CVV:</label>
                     <input type="text" id="cvv" name="cvv" />
                     <br />
                     <br />
-                    <button type="button">Submit Payment</button>
+                    <button type="button" onClick={handlePaymentSubmit}>
+                      Submit Payment
+                    </button>
                   </div>
                 )}
                 {selectedPaymentMethod === 'UPI' && (
@@ -168,7 +209,9 @@ function BookingForm() {
                     <input type="text" id="upiID" name="upiID" />
                     <br />
                     <br />
-                    <button type="button">Submit Payment</button>
+                    <button type="button" onClick={handlePaymentSubmit}>
+                      Submit Payment
+                    </button>
                   </div>
                 )}
               </div>

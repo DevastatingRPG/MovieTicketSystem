@@ -13,7 +13,7 @@ function SignUp() {
     gender: 'Male', // Set a default value
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -21,7 +21,7 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
     // Add your logic for submitting the form data to the server if needed
@@ -52,7 +52,16 @@ function SignUp() {
                 onChange={handleChange} />
               <br />
               <br />
-              <p>Set password:</p>
+              <p>Enter username:</p>
+              <input
+                type="text"
+                placeholder="Enter Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange} />
+              <br />
+              <br />
+              <p>Enter a password:</p>
               <input
                 type="password"
                 placeholder="Enter password"
