@@ -18,7 +18,7 @@ function Login() {
           <p>Enter your password:</p>
           <input type="password" placeholder="Enter password" />
           <br />
-          <br /><br />
+          <br />
           <input type="submit" value="Submit" id="submit" />
         </main>
         <li className="admin-login-btn">
