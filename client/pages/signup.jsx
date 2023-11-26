@@ -55,9 +55,9 @@ function SignUp() {
               <p>Enter username:</p>
               <input
                 type="text"
-                placeholder="Enter Name"
-                name="name"
-                value={formData.name}
+                placeholder="Enter Username"
+                name="username"
+                value={formData.username}
                 onChange={handleChange} />
               <br />
               <br />
