@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/layout.tsx", "pages/index.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/layout.jsx", "pages/index.jsx", "components/deleteShow.jsx", "components/deleteVenue.jsx", "components/footer.jsx", "components/header.jsx", "components/insertShow.jsx", "components/insertVenue.jsx", "components/layout.jsx", "components/navbar.jsx", "pages/signup.jsx", "pages/movies.jsx", "pages/login.jsx", "pages/booking.jsx", "pages/admin.jsx"],
   "exclude": ["node_modules"]
 }
