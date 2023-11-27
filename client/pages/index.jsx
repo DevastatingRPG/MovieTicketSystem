@@ -4,6 +4,7 @@ import 'styles/navbar.css';
 import Layout from '@/components/layout';
 import Navbar from '@/components/navbar';
 import { fetchData } from '../utilities/fetching'
+import Image from 'next/image';
 
 function MovieTicketBookingSystem() {
   const [data, setData] = useState(null);
@@ -43,7 +44,7 @@ function MovieTicketBookingSystem() {
           </section>
           <br />
           <section id="img">
-            <img src="" height="500px" alt="Movie Poster" />
+            <Image src="https://wallpaperaccess.com/full/3659750.jpg" width={888} height={500} alt="Movie Poster" />
           </section>
           <br />
         </main>
