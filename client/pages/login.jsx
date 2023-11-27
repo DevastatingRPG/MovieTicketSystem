@@ -1,9 +1,8 @@
+// Login.jsx
 import React, { useState } from 'react';
-import 'styles/login.css';
+import styles from 'styles/login.module.css'; // Import the local styles
 import Layout from '../components/layout';
 import Link from 'next/link';
-import 'styles/navbar.css';
-import Navbar from '@/components/navbar';
 
 function Login() {
   // State to manage the input values
@@ -21,9 +20,9 @@ function Login() {
 
   return (
     <Layout>
-      <div>
+      <div className={styles.container}>
         <h1>Enter your login details</h1>
-        <main>
+        <main className={styles.main}>
           <p>Enter your username:</p>
           <input
             type="text"
@@ -42,10 +41,14 @@ function Login() {
           />
           <br />
           <br />
-          <br />
-          <input type="submit" value="Submit" id="submit" onClick={handleSubmit} />
+          <input
+            className={styles.submitButton}
+            type="submit"
+            value="Submit"
+            onClick={handleSubmit}
+          />
         </main>
-        <li className="admin-login-btn">
+        <li className={styles.adminLoginBtn}>
           <Link href="admin">Admin Login</Link>
         </li>
       </div>

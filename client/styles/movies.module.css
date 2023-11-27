@@ -1,0 +1,29 @@
+/* MoviesList.module.css */
+
+.container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .movie {
+    margin-bottom: 20px;
+  }
+  
+  .movie p {
+    margin-bottom: 8px;
+  }
+  
+  .movie img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .booking-link {
+    margin-top: 20px;
+  }
+  
+  .booking-link a {
+    text-decoration: underline;
+    color: #007bff;
+  }
+  

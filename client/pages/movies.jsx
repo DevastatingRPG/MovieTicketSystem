@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import 'styles/movies.css';
+import styles from 'styles/movies.module.css'; // Import the local styles
 import Layout from '../components/layout';
-import 'styles/navbar.css';
-import Navbar from '@/components/navbar';
 
 function MoviesList() {
   // Placeholder movie data until fetched from the backend
@@ -34,10 +32,10 @@ function MoviesList() {
 
   return (
     <Layout>
-      <div>
+      <div className={styles.container}>
         <h1>Currently available movies:</h1>
         {movies.map(movie => (
-          <div key={movie.id}>
+          <div key={movie.id} className={styles.movie}>
             <p>
               <b>{movie.title}</b>
             </p>
@@ -49,9 +47,9 @@ function MoviesList() {
             <br />
           </div>
         ))}
-        <div>
+        <div className={styles.bookingLink}>
           <p>Click here to proceed with booking</p>
-          <br></br>
+          <br />
           <a href="booking">Bookings</a>
         </div>
       </div>

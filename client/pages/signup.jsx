@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import 'styles/signup.css';
+import styles from 'styles/signup.module.css'; // Import the local styles
 import Layout from '../components/layout';
-import Navbar from '../components/navbar';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -29,10 +28,10 @@ function SignUp() {
 
   return (
     <Layout>
-      <div>
+      <div className={styles.container}>
         <h1>Enter your details to create an account</h1>
         <main>
-          <section id="signin">
+          <section className={styles.form} id="signin">
             <form onSubmit={handleSubmit}>
               <p>Enter your name:</p>
               <input
@@ -40,7 +39,8 @@ function SignUp() {
                 placeholder="Enter Name"
                 name="name"
                 value={formData.name}
-                onChange={handleChange} />
+                onChange={handleChange}
+              />
               <br />
               <br />
               <p>Enter your email:</p>
@@ -103,11 +103,8 @@ function SignUp() {
               <input type="submit" value="Submit" id="submit" />
             </form>
           </section>
-          <br />
-          <section id="login">
-            <p>
-              Already have an account? Click the link below to log in.{' '}
-            </p>
+          <section className={styles.login_section} id="login">
+            <p>Already have an account? Click the link below to log in.</p>
             <a href="login">Login</a>
           </section>
         </main>

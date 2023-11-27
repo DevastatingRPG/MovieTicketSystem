@@ -1,18 +1,17 @@
+// MovieTicketBookingSystem.jsx
 import React from 'react';
-import 'styles/index.css';
-import 'styles/navbar.css';
+import styles from 'styles/index.module.css'; // Import the local styles
 import Layout from '@/components/layout';
-import Navbar from '@/components/navbar';
 
 function MovieTicketBookingSystem() {
   return (
     <Layout>
       <div>
-        <h1>
-          <u>MOVIE TICKET BOOKING SYSTEM</u>
+        <h1 className={styles.title}>
+          <u className={styles.u}>MOVIE TICKET BOOKING SYSTEM</u>
         </h1>
         <main>
-          <section id="intro">
+          <section id={styles.intro} className={styles.section}>
             <p>
               Welcome to the next frontier in cinematic convenience – our online movie ticket booking system!
             </p>
@@ -21,8 +20,8 @@ function MovieTicketBookingSystem() {
             </p>
           </section>
           <br />
-          <section id="img">
-            <img src="" height="500px" alt="Movie Poster" /> 
+          <section id={styles.img} className={styles.section}>
+            <img src="https://wallpaperaccess.com/full/3659750.jpg" height="500px" alt="Movie Poster" />
           </section>
           <br />
         </main>

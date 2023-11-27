@@ -1,0 +1,22 @@
+/* MovieTicketBookingSystem.module.css */
+
+.title {
+    font-size: 2rem;
+    color: #333;
+    /* Add any other styles you need for the title */
+  }
+  
+  .u {
+    text-decoration: underline;
+    /* Add any other styles you need for the underline */
+  }
+  
+  .intro {
+    margin-bottom: 20px;
+    /* Add any other styles you need for the introduction section */
+  }
+  
+  .img {
+    /* Add any styles you need for the image section */
+  }
+  

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import 'styles/booking.css';
+import styles from 'styles/booking.module.css';
 import Layout from '../components/layout';
-import 'styles/navbar.css';
+// import 'styles/navbar.css';
 import Navbar from '@/components/navbar';
 import seats from '../components/seats';
 import Seats from '../components/seats';
@@ -88,9 +88,10 @@ function BookingForm() {
 
   return (
     <Layout>
-      <div>
+      <div className={styles.container}>
         <h1>Select the movie you wish to watch and select the seats</h1>
-        <section id="booking">
+
+        <section className={styles.section} id="booking">
           <p>Select the movie</p>
           <select name="movie" value={selectedMovie} onChange={handleMovieChange}>
             <option value="">Select a movie</option>
@@ -113,58 +114,59 @@ function BookingForm() {
           </select>
         </section>
 
-        <section id="booking2">
-            <p>Enter the number of seats you want to book</p>
-            <input
-              type="text"
-              placeholder="Number of seats"
-              value={numberOfSeats}
-              onChange={(e) => setNumberOfSeats(e.target.value)}
-            />
-            <br />
-            <br />
-            <p>Enter the seat you want:</p>
-            <img
-              src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340"
-              alt="seating"
-            />
-            <br />
-            <br />
-            <input type="text" placeholder="Seat type" />
-            <br />
-            <br/>
-            <br/>
-            <p>Enter the date you want to watch the movie:</p>
-            <input
-              type="text"
-              placeholder="Date"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-            />
-            <br />
-            <br/>
-            <br/>
-            <p>Select your show timing:</p>
-            <select
-              name="timing"
-              value={selectedTiming}
-              onChange={(e) => setSelectedTiming(e.target.value)}
-            >
-              <option value="" disabled>
-                Select a timing
+        <section className={styles.section} id="booking2">
+          <p>Enter the number of seats you want to book</p>
+          <input
+            type="text"
+            placeholder="Number of seats"
+            value={numberOfSeats}
+            onChange={(e) => setNumberOfSeats(e.target.value)}
+          />
+          <br />
+          <br />
+          <p>Enter the seat you want:</p>
+          <img
+            className={styles.seatSelection}
+            src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340"
+            alt="seating"
+          />
+          <br />
+          <br />
+          <input type="text" placeholder="Seat type" />
+          <br />
+          <br />
+          <br />
+          <p>Enter the date you want to watch the movie:</p>
+          <input
+            type="text"
+            placeholder="Date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+          <br />
+          <br />
+          <br />
+          <p>Select your show timing:</p>
+          <select
+            name="timing"
+            value={selectedTiming}
+            onChange={(e) => setSelectedTiming(e.target.value)}
+          >
+            <option value="" disabled>
+              Select a timing
+            </option>
+            {showTimings.map((timing) => (
+              <option key={timing.id} value={timing.time}>
+                {timing.time}
               </option>
-              {showTimings.map((timing) => (
-                <option key={timing.id} value={timing.time}>
-                  {timing.time}
-                </option>
-              ))}
-            </select>
-            <br />
-          </section>
+            ))}
+          </select>
+        </section>
 
-        <section id="payment">
+        <section className={styles.section} id="payment">
           <p>Please select your method of payment</p>
           <select
+            className={styles.paymentMethods}
             name="paymentMethod"
             value={selectedPaymentMethod}
             onChange={handlePaymentMethodChange}
@@ -181,7 +183,7 @@ function BookingForm() {
           <br />
           <br />
           {selectedPaymentMethod && (
-            <div>
+            <div className={styles.paymentDetails}>
               {selectedPaymentMethod === 'Card' && (
                 <div>
                   <label htmlFor="cardNumber">Card Number:</label>
@@ -199,7 +201,7 @@ function BookingForm() {
                   <input type="text" id="cvv" name="cvv" />
                   <br />
                   <br />
-                  <button type="button" onClick={handlePaymentSubmit}>
+                  <button className={styles.submitButton} type="button" onClick={handlePaymentSubmit}>
                     Submit Payment
                   </button>
                 </div>
@@ -210,7 +212,7 @@ function BookingForm() {
                   <input type="text" id="upiID" name="upiID" />
                   <br />
                   <br />
-                  <button type="button" onClick={handlePaymentSubmit}>
+                  <button className={styles.submitButton} type="button" onClick={handlePaymentSubmit}>
                     Submit Payment
                   </button>
                 </div>
