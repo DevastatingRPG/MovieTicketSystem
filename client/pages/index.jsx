@@ -1,6 +1,6 @@
+// MovieTicketBookingSystem.jsx
 import React, { useEffect, useState } from 'react';
-import 'styles/index.css';
-import 'styles/navbar.css';
+import styles from 'styles/index.module.css'; // Import the local styles
 import Layout from '@/components/layout';
 import Navbar from '@/components/navbar';
 import { fetchData } from '../utilities/fetching'
@@ -30,11 +30,11 @@ function MovieTicketBookingSystem() {
   return (
     <Layout>
       <div>
-        <h1>
-          <u>MOVIE TICKET BOOKING SYSTEM</u>
+        <h1 className={styles.title}>
+          <u className={styles.u}>MOVIE TICKET BOOKING SYSTEM</u>
         </h1>
         <main>
-          <section id="intro">
+          <section id={styles.intro} className={styles.section}>
             <p>
               Welcome to the next frontier in cinematic convenience – our online movie ticket booking system!
             </p>

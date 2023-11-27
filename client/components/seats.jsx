@@ -1,5 +1,5 @@
  // components/Seats.js
- import styles from '../styles/Seats.module.css';
+ import styles from 'styles/seats.module.css';
 
  export default function Seats({ occupiedSeats }) {
    const seats = Array.from({ length: 60 }, (_, i) => i + 1);

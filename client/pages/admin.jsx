@@ -1,16 +1,13 @@
+// Admin.jsx
 import React, { useState } from 'react';
-import 'styles/admin.css';
-import 'styles/navbar.css'
+import styles from 'styles/admin.module.css'; // Import the local styles
 import Layout from '../components/layout';
-import Navbar from '../components/navbar';
 import InsertVenue from '@/components/insertVenue';
 import InsertShow from '@/components/insertShow';
 import DeleteShow from '@/components/deleteShow';
 import DeleteVenue from '@/components/deleteVenue';
-import styles from '../styles/AdminPage.module.css'
 
 function Admin() {
-
   const [functionType, setFunctionType] = useState('');
 
   return (

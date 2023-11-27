@@ -1,14 +1,14 @@
 import React from 'react'
 import Link from 'next/link';
-import 'styles/navbar.css'
+import styles from 'styles/navbar.module.css'
 
 function Navbar() {
     return (
-        <nav className="navbar">
-            <div className="navbar-left">
+        <nav className={styles.navbar}>
+            <div className={styles.navbar_left}>
                 <h1><Link href="/">PrismPlix</Link></h1>
             </div>
-            <div className="navbar-right">
+            <div className={styles.navbar_right}>
                 <ul>
                     <li>
                         <Link href="/signup">Sign-up/Log-in</Link>
