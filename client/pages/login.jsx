@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from 'styles/login.module.css'; // Import the local styles
 import Layout from '../components/layout';
 import Link from 'next/link';
-import 'styles/navbar.css';
 import Navbar from '@/components/navbar';
 import { postData } from '@/utilities/fetching';
 import { useRouter } from 'next/router';

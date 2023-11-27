@@ -1,11 +1,11 @@
 /* Admin.module.css */
 
 .AdminPage {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+/* h1 {
     color: #007bff;
   }
   
@@ -30,4 +30,4 @@
   input[type="submit"]:hover {
     background-color: #0056b3;
   }
-  
+   */
