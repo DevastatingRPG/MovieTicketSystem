@@ -27,7 +27,6 @@ function Admin() {
           {functionType === 'deleteVenue' && <DeleteVenue />}
           {functionType === 'deleteShow' && <DeleteShow />}
           <br />
-          <input className={styles.submitButton} type="submit" value="Submit" id="submit" />
         </main>
       </div>
     </Layout>

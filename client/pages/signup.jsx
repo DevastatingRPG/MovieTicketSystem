@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import styles from 'styles/signup.module.css'; // Import the local styles
 import Layout from '../components/layout';
+import Navbar from '../components/navbar';
+import { postData } from '@/utilities/fetching';
+import { useRouter } from 'next/router';
 
 function SignUp() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
+    uname: '',
     email: '',
     password: '',
     age: '',
-    contact: '',
-    gender: 'Male', // Set a default value
+    mobile: '',
+    gender: '', // Set a default value
   });
 
   const handleChange = (e) => {
@@ -20,9 +25,22 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
+    try {
+      const response = await postData('/register', formData);
+      if (response.data == "OK"){
+        router.replace('/login');
+      }
+      else{
+        alert(response.data);
+      }
+    }
+    catch (err) {
+      console.error(err);
+      alert(err);
+    }
     // Add your logic for submitting the form data to the server if needed
   };
 
@@ -56,8 +74,8 @@ function SignUp() {
               <input
                 type="text"
                 placeholder="Enter Username"
-                name="username"
-                value={formData.username}
+                name="uname"
+                value={formData.uname}
                 onChange={handleChange} />
               <br />
               <br />
@@ -83,8 +101,8 @@ function SignUp() {
               <input
                 type="text"
                 placeholder="Enter contact"
-                name="contact"
-                value={formData.contact}
+                name="mobile"
+                value={formData.mobile}
                 onChange={handleChange} />
               <br />
               <br />
@@ -94,9 +112,9 @@ function SignUp() {
                 value={formData.gender}
                 onChange={handleChange}
               >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Others">Others</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Others</option>
               </select>
               <br />
               <br />

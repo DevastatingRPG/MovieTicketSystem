@@ -1,9 +1,32 @@
 // MovieTicketBookingSystem.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'styles/index.module.css'; // Import the local styles
 import Layout from '@/components/layout';
+import Navbar from '@/components/navbar';
+import { fetchData } from '../utilities/fetching'
+import Image from 'next/image';
 
 function MovieTicketBookingSystem() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const test = async () => {
+      try {
+        let response = await fetchData('/booking?func=list');
+        setData(response);
+        console.log(data);
+      }
+      catch (err) {
+        console.error(err);
+      }
+    }
+
+    test()
+    
+  }, [])
+
+  console.log(data)
+
   return (
     <Layout>
       <div>
@@ -20,8 +43,8 @@ function MovieTicketBookingSystem() {
             </p>
           </section>
           <br />
-          <section id={styles.img} className={styles.section}>
-            <img src="https://wallpaperaccess.com/full/3659750.jpg" height="500px" alt="Movie Poster" />
+          <section id="img">
+            <Image src="https://wallpaperaccess.com/full/3659750.jpg" width={888} height={500} alt="Movie Poster" />
           </section>
           <br />
         </main>

@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 env = process.env;
 const PORT = env.PORT || 5000;
+const JWT_SECRET_KEY = env.JWT_SECRET_KEY;
 
 app.use(cors());
 app.use(express.query());
@@ -24,14 +25,14 @@ app.post('/admin', (req, res) => {
   let query;
   const { func } = req.query;
   const { vid, city, pincode, location, vtype, avail,
-    sid, name, producer, stype, timing, lead } = req.body;
+    sid, name, trailer, stype, timing, image } = req.body;
   // Stype is category'Action\',_utf8mb4\'Drama\',_utf8mb4\'Comedy\',_utf8mb4\'Thriller\',_utf8mb4\'Other\
   switch (func) {
     case 'insvenue':
       query = `CALL InsertVenue(${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
       break;
     case 'insshow':
-      query = `CALL InsertShow(${sid}, \'${name}\', \'${producer}\', \'${stype}\', \'${timing}\', \'${lead}\')`;
+      query = `CALL InsertShow(${sid}, \'${name}\', \'${trailer}\', \'${stype}\', \'${timing}\', \'${image}\')`;
       break;
     case 'delvenue':
       query = `DELETE FROM venue WHERE vid=${vid}`;
@@ -50,6 +51,17 @@ app.post('/admin', (req, res) => {
   })
 
 
+})
+
+app.get('/movies', (req, res) => {
+  query = 'SELECT * FROM Movies';
+  connection.query(query, (err, rows, fields) => {
+    if (err) {
+      console.error(err);
+      res.sendStatus(403);
+    }
+    res.send(rows);
+  })
 })
 
 app.get('/booking', (req, res) => {
@@ -100,11 +112,12 @@ app.get('/booking', (req, res) => {
 
 app.post('/booking', (req, res) => {
   const { func } = req.query;
-  const { uid, sid, pmeth, amount, stat, seat } = req.body;
+  const { uid, sid, pmeth, amount, stat, seat, timing } = req.body;
   switch (func) {
     case 'insert':
       query = `
-      CALL InsertBooking(${uid}, ${sid}, ${pmeth}, ${amount}, ${stat}, @bid);
+      CALL InsertBooking(${uid}, ${sid}, \'${pmeth}\', ${amount}, \'${stat}\', @bid);
+      CALL InsertTicket(@bid, \'${timing}\');
       CALL InsertSeatNo(${seat}, @bid)`;
       break;
   }
@@ -130,7 +143,14 @@ app.post('/login', (req, res) => {
     let result = rows[1][0];
     let verified = result["@verified"];
     let error = result["@error"];
-    res.send(error);
+    if (verified) {
+      const token = jwt.sign({ uid }, JWT_SECRET_KEY, { expiresIn: '30d' });
+      res.json({ token, message: 'Login successful' });
+    }
+    else {
+      res.send(error);
+
+    }
   })
 })
 

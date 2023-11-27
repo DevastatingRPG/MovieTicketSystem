@@ -1,5 +1,6 @@
 // components/InsertShow.js
 import React, { useState } from 'react';
+import { postData } from '@/utilities/fetching';
 
 export default function InsertShow() {
   // State variables to manage the input values
@@ -11,15 +12,22 @@ export default function InsertShow() {
   const [imageUrl, setImageUrl] = useState('');
 
   // Function to handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Log the input values to the console
-    console.log('Show ID:', showId);
-    console.log('Name:', name);
-    console.log('Category:', category);
-    console.log('Timing:', timing);
-    console.log('Trailer URL:', trailerUrl);
-    console.log('Image URL:', imageUrl);
 
+    try {
+      const response = await postData('/admin?func=insshow', { 
+        sid: showId,
+        name: name,
+        trailer: trailerUrl,
+        stype: category,
+        timing: timing,
+        image: imageUrl 
+      });
+    }
+    catch (err) {
+      console.error("Error Inserting Show : ", err)
+    }
     // You can add additional logic here, such as sending the data to a server
   };
 

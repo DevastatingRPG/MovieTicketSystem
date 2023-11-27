@@ -1,5 +1,6 @@
 // components/InsertVenue.js
 import React, { useState } from 'react';
+import { postData } from '@/utilities/fetching';
 
 export default function InsertVenue() {
   // State variables to manage the input values
@@ -11,15 +12,21 @@ export default function InsertVenue() {
   const [availability, setAvailability] = useState('');
 
   // Function to handle form submission
-  const handleSubmit = () => {
-    // Log the input values to the console
-    console.log('Venue ID:', venueId);
-    console.log('City:', city);
-    console.log('Pincode:', pincode);
-    console.log('Location:', location);
-    console.log('Venue Type:', venueType);
-    console.log('Availability:', availability);
+  const handleSubmit = async () => {
 
+    try {
+      const response = await postData('/admin?func=insshow', {
+        vid: venueId,
+        cirt: city,
+        pincode: pincode,
+        location: location,
+        vtype: venueType,
+        avail: availability
+      });
+    }
+    catch (err) {
+      console.error("Error Inserting Show : ", err)
+    }
     // You can add additional logic here, such as sending the data to a server
   };
 
@@ -76,7 +83,7 @@ export default function InsertVenue() {
         />
         <br />
         <br />
-        {/* <input type="submit" value="Submit" onClick={handleSubmit} /> */}
+        <input type="submit" value="Submit" onClick={handleSubmit} />
       </section>
     </div>
   );

@@ -3,18 +3,39 @@ import React, { useState } from 'react';
 import styles from 'styles/login.module.css'; // Import the local styles
 import Layout from '../components/layout';
 import Link from 'next/link';
+import 'styles/navbar.css';
+import Navbar from '@/components/navbar';
+import { postData } from '@/utilities/fetching';
+import { useRouter } from 'next/router';
 
 function Login() {
   // State to manage the input values
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   // Function to handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Log the input values to the console
-    console.log('Username:', username);
-    console.log('Password:', password);
-
+    try {
+      const response = await postData('/login', {
+        uid: username,
+        password: password
+      });
+      if (response.data.token){
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('uid', username);
+        router.replace('/')
+      }
+      else{
+        alert(response.data)
+      }
+      console.log(response.data)
+    }
+    catch (err) {
+      console.error(err);
+      alert(err);
+    }
     // You can add additional logic here, such as sending the data to a server
   };
 
