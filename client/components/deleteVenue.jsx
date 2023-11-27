@@ -30,6 +30,7 @@ export default function DeleteVenue() {
           onChange={(e) => setVenueId(e.target.value)}
         />
         <br />
+        <br />
         <input type="submit" value="Submit" onClick={handleSubmit} />
       </section>
     </div>

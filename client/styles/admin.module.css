@@ -1,24 +1,24 @@
 /* Admin.module.css */
 
 .AdminPage {
-  text-align: center;
-  margin: 20px;
-}
-
-/* h1 {
+    text-align: center;
+    margin: 20px;
+  }
+  
+.h1 {
     color: #007bff;
   }
   
-  main {
+.main {
     margin-top: 20px;
   }
   
-  select {
+.select {
     padding: 8px;
     margin-bottom: 16px;
   }
   
-  input[type="submit"] {
+.input[type="submit"] {
     background-color: #007bff;
     color: white;
     cursor: pointer;
@@ -27,7 +27,7 @@
     border-radius: 4px;
   }
   
-  input[type="submit"]:hover {
+.input[type="submit"]:hover {
     background-color: #0056b3;
   }
-   */
+  
