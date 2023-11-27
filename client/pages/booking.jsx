@@ -309,5 +309,5 @@ function BookingForm() {
       </Layout>
     );
   }
-
-  export default BookingForm;
+}
+export default BookingForm;
