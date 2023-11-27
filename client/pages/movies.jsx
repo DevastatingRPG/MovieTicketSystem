@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from 'styles/movies.module.css'; // Import the local styles
 import Layout from '../components/layout';
-import 'styles/navbar.css';
 import Navbar from '@/components/navbar';
 import { fetchData } from '@/utilities/fetching';
 

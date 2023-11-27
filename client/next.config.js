@@ -6,13 +6,13 @@ const nextConfig = {}
 // next.config.js
 module.exports = {
     images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'wallpaperaccess.com',
-          port: '',
-          pathname: '/full/**',
-        },
-      ],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'wallpaperaccess.com',
+                port: '',
+                pathname: '/full/**',
+            },
+        ],
     },
-  }
+}
