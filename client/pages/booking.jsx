@@ -169,11 +169,7 @@ function BookingForm() {
                     <br />
                     <br />
                     <p>Enter the seat you want:</p>
-                    <img
-                        className={styles.seatSelection}
-                        src="https://i0.wp.com/www.freestudentprojects.com/wp-content/uploads/2017/06/Android-based-Movie-Ticket-Booking-System.jpg?resize=405%2C340"
-                        alt="seating"
-                    />
+                    <Seats occupiedSeats={[10, 12, 14]}/>
                     <br />
                     <br />
                     <input type="text" placeholder="Seat type" />
