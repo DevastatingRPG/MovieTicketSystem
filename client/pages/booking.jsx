@@ -6,9 +6,14 @@ import { useRouter } from 'next/router';
 import Navbar from '@/components/navbar';
 import seats from '../components/seats';
 import Seats from '../components/seats';
+import { useForm } from 'react-hook-form';
+
 
 
 function BookingForm() {
+    const { register, handleSubmit, watch } = useForm();
+    const selectedPaymentMethod = watch('paymentMethod');
+
     // Placeholder movie data until fetched from the backend
     const router = useRouter()
     const [list, setList] = useState(null)
@@ -64,75 +69,137 @@ function BookingForm() {
             { SID: 5, name: 'Donno' },
         ],
     ];
-    const [selectedMovie, setSelectedMovie] = useState('');
-    const [numberOfSeats, setNumberOfSeats] = useState('');
-    const [selectedDate, setSelectedDate] = useState('');
-    const [selectedTiming, setSelectedTiming] = useState('');
-    const [selectedVenue, setSelectedVenue] = useState('');
-    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
     const [movies, setMovies] = useState(initialData[2]);
     const [venues, setVenues] = useState(initialData[1]);
     const [showTimings, setShowTimings] = useState(initialData[0]);
     const paymentMethods = ['Card', 'UPI'];
 
-    const handlePaymentMethodChange = (e) => {
-        setSelectedPaymentMethod(e.target.value);
-    };
-
-    const handleVenueChange = (e) => {
-        setSelectedVenue(e.target.value);
-    };
-
-    const handleMovieChange = (e) => {
-        setSelectedMovie(e.target.value);
-    };
-
     const handlePaymentSubmit = async () => {
         // Log the input values to the console
-        console.log('Selected Movie:', selectedMovie);
-        console.log('Number of Seats:', numberOfSeats);
-        console.log('Selected Seat:', selectedSeat);
-        console.log('Selected Date:', selectedDate);
-        console.log('Selected Timing:', selectedTiming);
-        console.log('Selected Payment Method:', selectedPaymentMethod);
-
-        if (selectedPaymentMethod === 'Card') {
-            const cardNumber = document.getElementById('cardNumber').value;
-            const cardHolderName = document.getElementById('cardHolderName').value;
-            const expirationDate = document.getElementById('expirationDate').value;
-            const cvv = document.getElementById('cvv').value;
-
-            console.log('Card Number:', cardNumber);
-            console.log('Card Holder Name:', cardHolderName);
-            console.log('Expiration Date:', expirationDate);
-            console.log('CVV:', cvv);
-        } else if (selectedPaymentMethod === 'UPI') {
-            const upiID = document.getElementById('upiID').value;
-            console.log('UPI ID:', upiID);
-        }
-
-
-
-        try {
-            const response = await postData('/admin?func=insshow', {
-                uid: uid,
-                sid: selectedMovie,
-                pmeth: selectedPaymentMethod,
-                amount: amount,
-                stat: stat,
-                timing: timing,
-                seat: selectedSeat
-            });
-        }
-        catch (err) {
-            console.error("Error Inserting Show : ", err)
-        }
+        // try {
+        //     const response = await postData('/admin?func=insshow', {
+        //         uid: uid,
+        //         sid: selectedMovie,
+        //         pmeth: selectedPaymentMethod,
+        //         amount: amount,
+        //         stat: stat,
+        //         timing: timing,
+        //         seat: selectedSeat
+        //     });
+        // }
+        // catch (err) {
+        //     console.error("Error Inserting Show : ", err)
+        // }
         // You can add additional logic here, such as sending the data to a server
+    };
+
+    const onSubmit = (data) => {
+        console.log(data);
     };
 
     return (
         <Layout>
-            <div className={styles.container}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <section>
+                    <p>Select the movie</p>
+                    <select {...register('movie')}>
+                        <option value="">Select a movie</option>
+                        {movies.map((movie) => (
+                            <option key={movie.SID} value={movie.SID}>
+                                {movie.name}
+                            </option>
+                        ))}
+                    </select>
+                    <p>Select the venue:</p>
+                    <select {...register('venue')}>
+                        <option value="">Select a venue</option>
+                        {venues.map((venue) => (
+                            <option key={venue.VID} value={venue.VID}>
+                                {venue.location}
+                            </option>
+                        ))}
+                    </select>
+                </section>
+
+                <section>
+                    <p>Enter the number of seats you want to book</p>
+                    <select {...register('numSeats')}>
+                        <option value="">Select Number of Seats : </option>
+                        {[...Array(10).keys()].map((seat) => (
+                            <option key={seat+1} value={seat+1}>
+                                {seat+1}
+                            </option>
+                        ))}
+                    </select>
+                    <p>Enter the seat you want:</p>
+                    <Seats occupiedSeats={[10, 12, 14]} />
+                    <input type="text" placeholder="Seat type" {...register('seatType')} />
+                    <p>Enter the date you want to watch the movie:</p>
+                    <input
+                        type="date"
+                        placeholder="Date"
+                        {...register('selectedDate')}
+                    />
+                    <p>Select your show timing:</p>
+                    <select {...register('timing')}>
+                        <option value="" disabled>
+                            Select a timing
+                        </option>
+                        {showTimings.map((timing) => (
+                            <option key={timing.id} value={timing.time}>
+                                {timing.time}
+                            </option>
+                        ))}
+                    </select>
+                </section>
+
+                <section>
+                    <p>Please select your method of payment</p>
+                    <select {...register('paymentMethod')}>
+                        <option value="" disabled>
+                            Select a payment method
+                        </option>
+                        {paymentMethods.map((method) => (
+                            <option key={method} value={method}>
+                                {method}
+                            </option>
+                        ))}
+                    </select>
+                    {selectedPaymentMethod && (
+                        <div>
+                            {selectedPaymentMethod === 'Card' && (
+                                <div>
+                                    <label htmlFor="cardNumber">Card Number:</label>
+                                    <input type="text" {...register('cardNumber')} />
+                                    <label htmlFor="cardHolderName">Card Holder Name:</label>
+                                    <input type="text" {...register('cardHolderName')} />
+                                    <label htmlFor="expirationDate">Expiration Date:</label>
+                                    <input
+                                        type="text"
+                                        placeholder="MM/YYYY"
+                                        {...register('expirationDate')}
+                                    />
+                                    <label htmlFor="cvv">CVV:</label>
+                                    <input type="text" {...register('cvv')} />
+                                    <button type="submit">
+                                        Submit Payment
+                                    </button>
+                                </div>
+                            )}
+                            {selectedPaymentMethod === 'UPI' && (
+                                <div>
+                                    <label htmlFor="upiID">UPI ID:</label>
+                                    <input type="text" {...register('upiID')} />
+                                    <button type="submit">
+                                        Submit Payment
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </section>
+            </form>
+            {/* <div className={styles.container}>
                 <h1>Select the movie you wish to watch and select the seats</h1>
 
                 <section className={styles.section} id="booking">
@@ -260,7 +327,8 @@ function BookingForm() {
                         </div>
                     )}
                 </section>
-            </div>
+            </div> */}
+
         </Layout>
     );
 }
