@@ -112,13 +112,14 @@ app.get('/booking', (req, res) => {
 
 app.post('/booking', (req, res) => {
   const { func } = req.query;
-  const { uid, sid, pmeth, amount, stat, seat, timing } = req.body;
+  const { uid, vid, sid, pmeth, amount, stat, seat, timing } = req.body;
+  let query;
   switch (func) {
     case 'insert':
       query = `
       CALL InsertBooking(${uid}, ${sid}, \'${pmeth}\', ${amount}, \'${stat}\', @bid);
-      CALL InsertTicket(@bid, \'${timing}\');
-      CALL InsertSeatNo(${seat}, @bid)`;
+      CALL InsertTicket(@bid, ${vid},\'${timing}\');
+      CALL InsertSeatNo(${seat}, @bid, ${sid})`;
       break;
   }
 
