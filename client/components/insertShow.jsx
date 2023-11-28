@@ -43,6 +43,7 @@ export default function InsertShow() {
           onChange={(e) => setShowId(e.target.value)}
         />
         <br />
+        <br />
         <p>Name:</p>
         <input
           type="text"
@@ -50,6 +51,7 @@ export default function InsertShow() {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        <br />
         <br />
         <p>Category:</p>
         <input
@@ -59,6 +61,7 @@ export default function InsertShow() {
           onChange={(e) => setCategory(e.target.value)}
         />
         <br />
+        <br />
         <p>Timing:</p>
         <input
           type="text"
@@ -67,6 +70,7 @@ export default function InsertShow() {
           onChange={(e) => setTiming(e.target.value)}
         />
         <br />
+        <br />
         <p>Trailer URL:</p>
         <input
           type="text"
@@ -74,6 +78,7 @@ export default function InsertShow() {
           value={trailerUrl}
           onChange={(e) => setTrailerUrl(e.target.value)}
         />
+        <br />
         <br />
         <p>Image URL:</p>
         <input

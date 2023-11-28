@@ -3,20 +3,28 @@
 .title {
     font-size: 2rem;
     color: #333;
+    text-align: center;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
     /* Add any other styles you need for the title */
   }
   
-  .u {
-    text-decoration: underline;
-    /* Add any other styles you need for the underline */
+  .title u{
+    text-decoration: none;
   }
   
-  .intro {
-    margin-bottom: 20px;
-    /* Add any other styles you need for the introduction section */
+  .section{
+      text-align: center;
+  }
+
+  .section p{
+    font-size: 20px;
   }
   
   .img {
-    /* Add any styles you need for the image section */
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
   }
   

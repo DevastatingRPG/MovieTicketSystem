@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from 'styles/movies.module.css'; // Import the local styles
 import Layout from '../components/layout';
-import Navbar from '@/components/navbar';
 import { fetchData } from '@/utilities/fetching';
+import Link from 'next/link';
 
 function MoviesList() {
   // Placeholder movie data until fetched from the backend
@@ -41,7 +41,7 @@ function MoviesList() {
       <div className={styles.container}>
         <h1>Currently available movies:</h1>
         {movies.map(movie => (
-          <div key={movie.sid} className={styles.movie}>
+          <div key={movie.id} className={styles.movie}>
             <p>
               <b>{movie.name}</b>
             </p>
@@ -53,11 +53,11 @@ function MoviesList() {
             <br />
           </div>
         ))}
-        <div className={styles.bookingLink}>
-          <p>Click here to proceed with booking</p>
-          <br />
-          <a href="booking">Bookings</a>
-        </div>
+        <p>Click here to proceed with booking</p>
+        <br />
+        <li className={styles.bookingLink}>
+          <Link href="booking">Bookings</Link>
+        </li>
       </div>
     </Layout>
   );

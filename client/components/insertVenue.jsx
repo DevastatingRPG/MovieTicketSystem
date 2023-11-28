@@ -42,6 +42,7 @@ export default function InsertVenue() {
           onChange={(e) => setVenueId(e.target.value)}
         />
         <br />
+        <br />
         <p>City:</p>
         <input
           type="text"
@@ -49,6 +50,7 @@ export default function InsertVenue() {
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
+        <br />
         <br />
         <p>Pincode:</p>
         <input
@@ -58,6 +60,7 @@ export default function InsertVenue() {
           onChange={(e) => setPincode(e.target.value)}
         />
         <br />
+        <br />
         <p>Location:</p>
         <input
           type="text"
@@ -66,6 +69,7 @@ export default function InsertVenue() {
           onChange={(e) => setLocation(e.target.value)}
         />
         <br />
+        <br />
         <p>Venue Type:</p>
         <input
           type="text"
@@ -73,6 +77,7 @@ export default function InsertVenue() {
           value={venueType}
           onChange={(e) => setVenueType(e.target.value)}
         />
+        <br />
         <br />
         <p>Availability:</p>
         <input

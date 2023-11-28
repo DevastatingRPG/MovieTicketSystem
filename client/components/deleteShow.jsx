@@ -31,7 +31,7 @@ export default function DeleteShow() {
         />
         <br />
         <br />
-        <input type="submit" value="Submit" onClick={handleSubmit} />
+        <input className="styles.in" type="submit" value="Submit" onClick={handleSubmit} />
       </section>
     </div>
   );

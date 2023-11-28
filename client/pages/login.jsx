@@ -21,12 +21,12 @@ function Login() {
         uid: username,
         password: password
       });
-      if (response.data.token){
+      if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('uid', username);
         router.replace('/')
       }
-      else{
+      else {
         alert(response.data)
       }
       console.log(response.data)
@@ -41,7 +41,7 @@ function Login() {
   return (
     <Layout>
       <div className={styles.container}>
-        <h1>Enter your login details</h1>
+        <h1>Enter login details</h1>
         <main className={styles.main}>
           <p>Enter your username:</p>
           <input
@@ -67,10 +67,10 @@ function Login() {
             value="Submit"
             onClick={handleSubmit}
           />
+          <li className={styles.adminLoginBtn}>
+            <Link href="admin">Admin Login</Link>
+          </li>
         </main>
-        <li className={styles.adminLoginBtn}>
-          <Link href="admin">Admin Login</Link>
-        </li>
       </div>
     </Layout>
   );

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from 'styles/index.module.css'; // Import the local styles
 import Layout from '@/components/layout';
-import Navbar from '@/components/navbar';
 import { fetchData } from '../utilities/fetching'
 import Image from 'next/image';
 
@@ -31,7 +30,7 @@ function MovieTicketBookingSystem() {
     <Layout>
       <div>
         <h1 className={styles.title}>
-          <u className={styles.u}>MOVIE TICKET BOOKING SYSTEM</u>
+          <u>MOVIE TICKET BOOKING SYSTEM</u>
         </h1>
         <main>
           <section id={styles.intro} className={styles.section}>
@@ -44,7 +43,7 @@ function MovieTicketBookingSystem() {
           </section>
           <br />
           <section id="img">
-            <Image src="https://wallpaperaccess.com/full/3659750.jpg" width={888} height={500} alt="Movie Poster" />
+            <Image src="https://wallpaperaccess.com/full/3659750.jpg" width={888} height={500} alt="Movie Poster" className={styles.img}/>
           </section>
           <br />
         </main>

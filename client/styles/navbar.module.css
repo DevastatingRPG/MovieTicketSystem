@@ -1,13 +1,18 @@
-/* Header styles */
-
-/* Navbar styles */
 .navbar {
   background-color: black;
-
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
 }
 
+.navbar_container {
+  display: flex;
+}
 
-.navbar_left a{
+.navbar_left a {
   margin: 0;
   padding-left: 1em;
   color: white;
@@ -22,16 +27,13 @@
   list-style: none;
   margin: 0;
   padding: 0;
-
 }
-
 
 .navbar_right a {
   text-decoration: none;
   color: white;
   padding: 10px 20px;
   background-color: black;
-
   transition: background-color 0.3s; /* Added smooth transition effect */
 }
 
@@ -40,35 +42,10 @@
   color: black; /* Darker background on hover */
 }
 
-/* header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-} */
-
-.navbar {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar_container {
-  display: flex;
-}
-
-
 .navbar_right ul {
   list-style: none;
   display: flex;
   align-items: center;
-}
-
-.navbar_right h1 {
-  margin: 0;
-  margin-right: 20px;
 }
 
 .navbar_right li {

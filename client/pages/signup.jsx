@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from 'styles/signup.module.css'; // Import the local styles
 import Layout from '../components/layout';
-import Navbar from '../components/navbar';
 import { postData } from '@/utilities/fetching';
 import { useRouter } from 'next/router';
 
@@ -14,7 +13,7 @@ function SignUp() {
     password: '',
     age: '',
     mobile: '',
-    gender: '', // Set a default value
+    gender: '',
   });
 
   const handleChange = (e) => {
@@ -64,7 +63,7 @@ function SignUp() {
               <p>Enter your email:</p>
               <input
                 type="text"
-                placeholder="Enter email"
+                placeholder="Enter Email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange} />
@@ -82,7 +81,7 @@ function SignUp() {
               <p>Enter a password:</p>
               <input
                 type="password"
-                placeholder="Enter password"
+                placeholder="Enter Password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange} />
@@ -100,7 +99,7 @@ function SignUp() {
               <p>Enter your contact number:</p>
               <input
                 type="text"
-                placeholder="Enter contact"
+                placeholder="Enter contact number"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange} />
@@ -112,6 +111,7 @@ function SignUp() {
                 value={formData.gender}
                 onChange={handleChange}
               >
+                <option value="">Select gender</option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
                 <option value="O">Others</option>
@@ -122,8 +122,7 @@ function SignUp() {
             </form>
           </section>
           <section className={styles.login_section} id="login">
-            <p>Already have an account? Click the link below to log in.</p>
-            <a href="login">Login</a>
+            <p>Already have an account? Click here to <a href="login">login</a></p>
           </section>
         </main>
         <br />
