@@ -24,13 +24,15 @@ function MoviesList() {
   ];
   const [movies, setMovies] = useState(initialMovies);
 
-  // useEffect(() => {
-  //   // Fetch movie data from the backend server
-  //   const getMovies = async () => {
-  //     const response = await fetchData('/movies');
-  //     setMovies(response)
-  //     console.log(response);
-  //   }
+  useEffect(() => {
+    // Fetch movie data from the backend server
+    const getMovies = async () => {
+      const response = await fetchData('/movies');
+      if (response)
+        setMovies(response)
+      console.log(response);
+    }
+
 
   //   getMovies()
 
