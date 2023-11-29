@@ -9,12 +9,10 @@ function MovieTicketBookingSystem() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    console.log(localStorage.getItem('uid'))
     const test = async () => {
       try {
         let response = await fetchData('/booking?func=list');
         setData(response);
-        console.log(data);
       }
       catch (err) {
         console.error(err);

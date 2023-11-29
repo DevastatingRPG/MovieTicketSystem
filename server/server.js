@@ -147,8 +147,8 @@ app.post('/booking', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    const { uid, password } = req.body;
-    const query = `CALL VerifyUserCredentials(\'${uid}\', \'${password}\', @verified, @error); SELECT @verified, @error;`;
+    const { uname, password } = req.body;
+    const query = `CALL VerifyUserCredentials(\'${uname}\', \'${password}\', @verified, @error); SELECT @verified, @error;`;
     connection.query(query, (err, rows, fields) => {
         if (err) {
             console.error(err);
@@ -158,7 +158,7 @@ app.post('/login', (req, res) => {
         let verified = result["@verified"];
         let error = result["@error"];
         if (verified) {
-            const token = jwt.sign({ uid }, JWT_SECRET_KEY, { expiresIn: '30d' });
+            const token = jwt.sign({ uname }, JWT_SECRET_KEY, { expiresIn: '30d' });
             res.json({ token, message: 'Login successful' });
         }
         else {

@@ -8,63 +8,73 @@ import { postData } from '@/utilities/fetching';
 import { useRouter } from 'next/router';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useForm, Controller } from 'react-hook-form';
 
 function Login() {
-  // State to manage the input values
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();
+    // State to manage the input values
+    const router = useRouter();
+    const { handleSubmit, control } = useForm();
+    
+    const onSubmit = async (data) => {
+        try {
+            const response = await postData('/login', data);
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('uid', data.uname);
+                router.replace('/')
+            }
+            else {
+                alert(response.data)
+            }
+        }
+        catch (err) {
+            console.error("Error Logging in : ", err);
+            alert(err);
+        }
+    };
 
-  // Function to handle form submission
-  const handleSubmit = async () => {
-    // Log the input values to the console
-    try {
-      const response = await postData('/login', {
-        uid: username,
-        password: password
-      });
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('uid', username);
-        router.replace('/')
-      }
-      else {
-        alert(response.data)
-      }
-      console.log(response.data)
-    }
-    catch (err) {
-      console.error(err);
-      alert(err);
-    }
-    // You can add additional logic here, such as sending the data to a server
-  };
 
-  return (
-    <Layout>
-      <div className={styles.container}>
-        <h1>Enter login details</h1>
-        <main className={styles.main}>
-          <p>Enter your username:</p>
-          <TextField id="outlined-basic" label="Username" variant="outlined" />
-          <br />
-          <br />
-          <p>Enter your password:</p>
-          <TextField id="outlined-basic" label="Password" variant="outlined" />
-          <br />
-          <br />
-          <Button variant="contained" onClick={handleSubmit}>
-            Submit
-          </Button>
-          <br />
-          <br />
-          <Button variant="contained" onClick={() => window.location.href = "/admin"}>
-            Admin Login
-          </Button>
-        </main>
-      </div>
-    </Layout>
-  );
+    return (
+        <Layout>
+            <div className={styles.container}>
+                <h1>Enter login details</h1>
+                <main className={styles.main}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <p>Enter your username:</p>
+                        <Controller
+                            name="uname"
+                            control={control}
+                            render={({ field }) => (
+                                <TextField {...field} id="outlined-basic" label="Username" variant="outlined" />
+                            )}
+                        />
+                        {/* <TextField id="outlined-basic" label="Username" variant="outlined" /> */}
+                        <br />
+                        <br />
+                        <p>Enter your password:</p>
+                        <Controller
+                            name="password"
+                            control={control}
+                            render={({ field }) => (
+                                <TextField {...field} id="outlined-basic" label="Password" variant="outlined" type='password' />
+                            )}
+                        />
+                        {/* <TextField id="outlined-basic" label="Password" variant="outlined" /> */}
+                        <br />
+                        <br />
+                        <Button variant="contained" type='submit'>
+                            Submit
+                        </Button>
+                        <br />
+                        <br />
+                        <Button variant="contained" onClick={() => window.location.href = "/admin"}>
+                            Admin Login
+                        </Button>
+                    </form>
+                </main>
+            </div>
+        </Layout>
+    );
 }
 
 export default Login;

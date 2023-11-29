@@ -32,11 +32,9 @@ function MoviesList() {
         setMovies(response)
       console.log(response);
     }
+    getMovies()
 
-
-  //   getMovies()
-
-  // }, []); // The empty dependency array ensures that this effect runs once after the initial render
+  }, []); // The empty dependency array ensures that this effect runs once after the initial render
 
   return (
     <Layout>
