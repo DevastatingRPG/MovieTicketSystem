@@ -7,8 +7,7 @@ import Navbar from '@/components/navbar';
 import seats from '../components/seats';
 import Seats from '../components/seats';
 import { useForm, Controller } from 'react-hook-form';
-
-
+import { FormControl, InputLabel, Select, MenuItem, TextField, Button } from '@mui/material';
 
 function BookingForm() {
     const { register, handleSubmit, control, watch, setValue } = useForm();
@@ -32,14 +31,14 @@ function BookingForm() {
             catch (err) {
                 console.error("Error fetching Movie and Venues : ", err);
             }
-                let id = localStorage.getItem('uid')
-                if (id)
-                    setUID(localStorage.getItem('uid'));
-                else{
-                    console.error("User not logged in : ", err);
-                    router.replace('/login');
-                }
-                
+            let id = localStorage.getItem('uid')
+            if (id)
+                setUID(localStorage.getItem('uid'));
+            else {
+                console.error("User not logged in : ");
+                // router.replace('/login');
+            }
+
 
         }
         getList()
@@ -92,109 +91,165 @@ function BookingForm() {
     }, [selectedSeats]);
 
     useEffect(() => {
-        setValue('timing', `${selectedDate} ${selectedTime}:00`)   
+        setValue('timing', `${selectedDate} ${selectedTime}:00`)
     }, [selectedDate, selectedTime])
 
     return (
         <Layout>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <section>
+                <section className={styles.booking}>
                     <p>Select the movie</p>
-                    <select {...register('sid')}>
-                        <option value="">Select a movie</option>
-                        {movies.map((movie) => (
-                            <option key={movie.SID} value={movie.SID}>
-                                {movie.name}
-                            </option>
-                        ))}
-                    </select>
-                    <p>Select the venue:</p>
-                    <select {...register('vid')}>
-                        <option value="">Select a venue</option>
-                        {venues.map((venue) => (
-                            <option key={venue.VID} value={venue.VID}>
-                                {venue.location}
-                            </option>
-                        ))}
-                    </select>
-                </section>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a movie</InputLabel>
+                        <Controller
+                            name="sid"
+                            control={control}
+                            render={({ field }) => (
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a movie
+                                    </MenuItem>
+                                    {movies.map((movie) => (
+                                        <MenuItem key={movie.SID} value={movie.SID}>
+                                            {movie.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            )}
+                        />
+                    </FormControl>
 
-                <section>
+                    <p>Select the venue:</p>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a venue</InputLabel>
+                        <Controller
+                            name="vid"
+                            control={control}
+                            render={({ field }) => (
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a venue
+                                    </MenuItem>
+                                    {venues.map((venue) => (
+                                        <MenuItem key={venue.VID} value={venue.VID}>
+                                            {venue.location}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            )}
+                        />
+                    </FormControl>
+
                     <p>Select the seat you want:</p>
                     <Controller
                         name="seats"
                         control={control}
-                        defaultValue={selectedSeats}
                         render={({ field }) => (
-                            <Seats occupiedSeats={[10, 12, 14]} setSelectedSeats={setSelectedSeats} selectedSeats={selectedSeats} />
+                            <Seats
+                                occupiedSeats={[10, 12, 14]}
+                                setSelectedSeats={setSelectedSeats}
+                                selectedSeats={selectedSeats}
+                            />
                         )}
                     />
+
                     <p>Enter the date you want to watch the movie:</p>
-                    <input
+                    <TextField
                         type="date"
                         placeholder="Date"
                         {...register('selectedDate')}
                     />
-                    <p>Select your show timing:</p>
-                    <select {...register('selectedTime')}>
-                        <option value="" disabled>
-                            Select a timing
-                        </option>
-                        {showTimings.map((timing) => (
-                            <option key={timing} value={timing}>
-                                {timing}
-                            </option>
-                        ))}
-                    </select>
-                </section>
 
-                <section>
+                    <p>Select your show timing:</p>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a timing</InputLabel>
+                        <Controller
+                            name="selectedTime"
+                            control={control}
+                            render={({ field }) => (
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a timing
+                                    </MenuItem>
+                                    {showTimings.map((timing) => (
+                                        <MenuItem key={timing} value={timing}>
+                                            {timing}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            )}
+                        />
+                    </FormControl>
+
                     <p>Please select your method of payment</p>
-                    <select {...register('pmeth')}>
-                        <option value="" disabled>
-                            Select a payment method
-                        </option>
-                        {paymentMethods.map((method) => (
-                            <option key={method} value={method}>
-                                {method}
-                            </option>
-                        ))}
-                    </select>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a payment method</InputLabel>
+                        <Controller
+                            name="pmeth"
+                            control={control}
+                            render={({ field }) => (
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a payment method
+                                    </MenuItem>
+                                    {paymentMethods.map((method) => (
+                                        <MenuItem key={method} value={method}>
+                                            {method}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            )}
+                        />
+                    </FormControl>
+
                     {selectedPaymentMethod && (
                         <div>
                             {selectedPaymentMethod === 'Card' && (
                                 <div>
-                                    <label htmlFor="cardNumber">Card Number:</label>
-                                    <input type="text" {...register('cardNumber')} />
-                                    <label htmlFor="cardHolderName">Card Holder Name:</label>
-                                    <input type="text" {...register('cardHolderName')} />
-                                    <label htmlFor="expirationDate">Expiration Date:</label>
-                                    <input
-                                        type="text"
+                                    <br/>
+                                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                                    <TextField label="Card Number" {...register('cardNumber')} />
+                                    <br />
+                                    <br/>
+                                    <TextField
+                                        label="Card Holder Name"
+                                        {...register('cardHolderName')}
+                                    />
+                                    <br/>
+                                    <br/>
+                                    <TextField
+                                        label="Expiration Date"
                                         placeholder="MM/YYYY"
                                         {...register('expirationDate')}
                                     />
-                                    <label htmlFor="cvv">CVV:</label>
-                                    <input type="text" {...register('cvv')} />
-                                    <button type="submit">
+                                    <br/>
+                                    <br/>
+                                    <TextField label="CVV" {...register('cvv')} />
+                                    </FormControl>
+                                    <br/>
+                                    <br/>
+                                    <Button type="submit" variant="contained" color="primary">
                                         Submit Payment
-                                    </button>
+                                    </Button>
                                 </div>
                             )}
                             {selectedPaymentMethod === 'UPI' && (
                                 <div>
-                                    <label htmlFor="upiID">UPI ID:</label>
-                                    <input type="text" {...register('upiID')} />
-                                    <button type="submit">
+                                    <br/>
+                                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                                    <TextField label="UPI ID" {...register('upiID')} />
+                                    </FormControl>
+                                    <br/>
+                                    <br/>
+                                    <Button type="submit" variant="contained" color="primary">
                                         Submit Payment
-                                    </button>
+                                    </Button>
                                 </div>
                             )}
                         </div>
                     )}
                 </section>
             </form>
-
         </Layout>
     );
 }

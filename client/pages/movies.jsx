@@ -32,7 +32,8 @@ function MoviesList() {
         setMovies(response)
       console.log(response);
     }
-
+  }
+)
 
   //   getMovies()
 
