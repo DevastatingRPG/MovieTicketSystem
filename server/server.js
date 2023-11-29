@@ -14,160 +14,174 @@ app.use(express.query());
 app.use(express.json());
 
 const connection = mysql.createConnection({
-  host: env.SQL_SERVER,
-  user: env.SQL_USER,
-  password: env.SQL_PASSWORD,
-  database: env.SQL_DATABASE,
-  multipleStatements: true,
+    host: env.SQL_SERVER,
+    user: env.SQL_USER,
+    password: env.SQL_PASSWORD,
+    database: env.SQL_DATABASE,
+    multipleStatements: true,
 });
 
 app.post('/admin', (req, res) => {
-  let query;
-  const { func } = req.query;
-  const { vid, city, pincode, location, vtype, avail,
-    sid, name, trailer, stype, timing, image } = req.body;
-  // Stype is category'Action\',_utf8mb4\'Drama\',_utf8mb4\'Comedy\',_utf8mb4\'Thriller\',_utf8mb4\'Other\
-  switch (func) {
-    case 'insvenue':
-      query = `CALL InsertVenue(${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
-      break;
-    case 'insshow':
-      query = `CALL InsertShow(${sid}, \'${name}\', \'${trailer}\', \'${stype}\', \'${timing}\', \'${image}\')`;
-      break;
-    case 'delvenue':
-      query = `DELETE FROM venue WHERE vid=${vid}`;
-      break;
-    case 'delshow':
-      query = `DELETE FROM shows WHERE sid=${sid}`;
-      break;
-  }
-
-  connection.query(query, (err, rows, fields) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(403);
+    let query;
+    const { func } = req.query;
+    const { vid, city, pincode, location, vtype, avail,
+        sid, name, trailer, stype, timing, image } = req.body;
+    // Stype is category'Action\',_utf8mb4\'Drama\',_utf8mb4\'Comedy\',_utf8mb4\'Thriller\',_utf8mb4\'Other\
+    switch (func) {
+        case 'insvenue':
+            query = `CALL InsertVenue(${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
+            break;
+        case 'insshow':
+            query = `CALL InsertShow(${sid}, \'${name}\', \'${trailer}\', \'${stype}\', \'${timing}\', \'${image}\')`;
+            break;
+        case 'delvenue':
+            query = `DELETE FROM venue WHERE vid=${vid}`;
+            break;
+        case 'delshow':
+            query = `DELETE FROM shows WHERE sid=${sid}`;
+            break;
     }
-    res.sendStatus(200);
-  })
+
+    connection.query(query, (err, rows, fields) => {
+        if (err) {
+            console.error(err);
+            res.sendStatus(403);
+        }
+        res.sendStatus(200);
+    })
 
 
 })
 
 app.get('/movies', (req, res) => {
-  query = 'SELECT * FROM Movies';
-  connection.query(query, (err, rows, fields) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(403);
-    }
-    res.send(rows);
-  })
+    query = 'SELECT * FROM Movies';
+    connection.query(query, (err, rows, fields) => {
+        if (err) {
+            console.error(err);
+            res.sendStatus(403);
+        }
+        res.send(rows);
+    })
 })
 
 app.get('/booking', (req, res) => {
-  const { func, uid, sid, vid } = req.query;
-  let query;
-  switch (func) {
-    case 'avail':
-      query = `CALL Show_Availability(${sid}, ${vid}, @avail, @error); SELECT @avail, @error`;
-      connection.query(query, (err, rows, fields) => {
-        if (err) {
-          console.error(err);
-          res.sendStatus(403);
-        }
-        let result = rows[1][0]
-        let avail = result["@avail"];
-        let error = result["@error"];
-        if (error) {
-          res.send(error);
-        }
-        else {
-          res.send(avail);
-        }
-      })
-      break;
-    case 'list':
-      query = 'SELECT * FROM event_location; SELECT VID, location FROM venue; SELECT SID, name FROM shows;';
-      connection.query(query, (err, rows, fields) => {
-        if (err) {
-          console.error(err);
-          res.sendStatus(403);
-        }
-        res.send(rows);
-      })
-      break;
-    case 'occupied':
-      query = `CALL GetOccupiedSeats(${sid}, ${vid}, @occupied); SELECT @occupied;`;
-      connection.query(query, (err, rows, fields) => {
-        if (err) {
-          console.error(err);
-          res.sendStatus(403);
-        }
-        res.send(rows[1][0]["@occupied"]);
-      })
-      break;
-  }
+    const { func, uid, sid, vid } = req.query;
+    let query;
+    switch (func) {
+        case 'avail':
+            query = `CALL Show_Availability(${sid}, ${vid}, @avail, @error); SELECT @avail, @error`;
+            connection.query(query, (err, rows, fields) => {
+                if (err) {
+                    console.error(err);
+                    res.sendStatus(403);
+                }
+                let result = rows[1][0]
+                let avail = result["@avail"];
+                let error = result["@error"];
+                if (error) {
+                    res.send(error);
+                }
+                else {
+                    res.send(avail);
+                }
+            })
+            break;
+        case 'list':
+            query = 'SELECT * FROM event_location; SELECT VID, location FROM venue; SELECT SID, name FROM shows;';
+            connection.query(query, (err, rows, fields) => {
+                if (err) {
+                    console.error(err);
+                    res.sendStatus(403);
+                }
+                res.send(rows);
+            })
+            break;
+        case 'occupied':
+            query = `CALL GetOccupiedSeats(${sid}, ${vid}, @occupied); SELECT @occupied;`;
+            connection.query(query, (err, rows, fields) => {
+                if (err) {
+                    console.error(err);
+                    res.sendStatus(403);
+                }
+                res.send(rows[1][0]["@occupied"]);
+            })
+            break;
+    }
 
 })
 
 app.post('/booking', (req, res) => {
-  const { func } = req.query;
-  const { uid, vid, sid, pmeth, amount, stat, seat, timing } = req.body;
-  let query;
-  switch (func) {
-    case 'insert':
-      query = `
-      CALL InsertBooking(${uid}, ${sid}, \'${pmeth}\', ${amount}, \'${stat}\', @bid);
-      CALL InsertTicket(@bid, ${vid},\'${timing}\');
-      CALL InsertSeatNo(${seat}, @bid, ${sid})`;
-      break;
-  }
+    const { func } = req.query;
+    const { uid, vid, sid, pmeth, amount, seats, timing } = req.body;
+    let query;
+    switch (func) {
+        case 'insert':
+            var bid;
+            // query = `CALL InsertBooking(${uid}, ${sid}, \'${pmeth}\', ${amount}, \'Y\', @bid);`
+            query = `CALL InsertBooking(1, 20, \'${pmeth}\', ${amount}, \'Y\', @bid); SELECT @bid`
 
-  connection.query(query, (err, rows, fields) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(403);
+            connection.query(query, async (err, rows, fields) => {
+                if (err) {
+                    console.error(err);
+                }
+                bid = rows[1][0]["@bid"]
+                for (let seat of seats) {
+                    console.log(seat)
+                    await new Promise((resolve, reject) => {
+                        connection.query(`CALL InsertTicket(${bid}, 3,\'${timing}\', ${seat})`, (err, rows, fields) => {
+                            if (err) {
+                                console.error(err);
+                                reject(err);
+                            } else {
+                                resolve();
+                            }
+                        })
+                    })
+                }
+            })
+
+            break;
     }
-    res.sendStatus(200);
-  })
+
+
 
 });
 
 app.post('/login', (req, res) => {
-  const { uid, password } = req.body;
-  const query = `CALL VerifyUserCredentials(\'${uid}\', \'${password}\', @verified, @error); SELECT @verified, @error;`;
-  connection.query(query, (err, rows, fields) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(403);
-    }
-    let result = rows[1][0];
-    let verified = result["@verified"];
-    let error = result["@error"];
-    if (verified) {
-      const token = jwt.sign({ uid }, JWT_SECRET_KEY, { expiresIn: '30d' });
-      res.json({ token, message: 'Login successful' });
-    }
-    else {
-      res.send(error);
+    const { uid, password } = req.body;
+    const query = `CALL VerifyUserCredentials(\'${uid}\', \'${password}\', @verified, @error); SELECT @verified, @error;`;
+    connection.query(query, (err, rows, fields) => {
+        if (err) {
+            console.error(err);
+            res.sendStatus(403);
+        }
+        let result = rows[1][0];
+        let verified = result["@verified"];
+        let error = result["@error"];
+        if (verified) {
+            const token = jwt.sign({ uid }, JWT_SECRET_KEY, { expiresIn: '30d' });
+            res.json({ token, message: 'Login successful' });
+        }
+        else {
+            res.send(error);
 
-    }
-  })
+        }
+    })
 })
 
 app.post('/register', (req, res) => {
-  const { name, email, age, gender, mobile, uname, password } = req.body;
-  const query = `CALL InsertUser(\'${name}\', \'${email}\', ${age}, 
+    const { name, email, age, gender, mobile, uname, password } = req.body;
+    const query = `CALL InsertUser(\'${name}\', \'${email}\', ${age}, 
   \'${gender}\', ${mobile}, \'${uname}\', \'${password}\')`;
-  connection.query(query, (err, rows, fields) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(409);
-    }
-    res.sendStatus(200);
-  })
+    connection.query(query, (err, rows, fields) => {
+        if (err) {
+            console.error(err);
+            res.sendStatus(409);
+        }
+        res.sendStatus(200);
+    })
 })
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
