@@ -7,7 +7,6 @@ const Footer = () => {
       <h3>Please contact: ticketbooking@gmail.com or 020-8867589 for any further queries or assistance.</h3>
       <style jsx>{`
         footer {
-          position: absolute;
           bottom: 0;
           width: 100%;
           background-color: black;
