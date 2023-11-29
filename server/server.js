@@ -126,7 +126,6 @@ app.post('/booking', (req, res) => {
                 }
                 bid = rows[1][0]["@bid"]
                 for (let seat of seats) {
-                    console.log(seat)
                     await new Promise((resolve, reject) => {
                         connection.query(`CALL InsertTicket(${bid}, 3,\'${timing}\', ${seat})`, (err, rows, fields) => {
                             if (err) {

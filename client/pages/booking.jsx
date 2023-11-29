@@ -76,7 +76,6 @@ function BookingForm() {
     const paymentMethods = ['Card', 'UPI'];
 
     const onSubmit = async (data) => {
-        console.log(data);
         try {
             const response = await postData('/booking?func=insert', data);
         }
