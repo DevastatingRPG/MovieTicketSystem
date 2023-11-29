@@ -1,30 +1,32 @@
-/* MovieTicketBookingSystem.module.css */
+/* styles/index.module.css */
 
 .title {
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    /* Add any other styles you need for the title */
-  }
-  
-  .title u{
-    text-decoration: none;
-  }
-  
-  .section{
-      text-align: center;
-  }
+  font-size: 3rem; /* Increase font size for a more prominent title */
+  color: black; /* Change text color to a cool blue */
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif; /* Change font family for a modern look */
+  margin-bottom: 20px; /* Add some space below the title */
+}
 
-  .section p{
-    font-size: 20px;
-  }
-  
-  .img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-  }
-  
+.title u {
+  text-decoration: none; /* Use underline for the emphasized text */
+}
+
+.section {
+  text-align: center; /* Use justified text alignment for a cleaner look */
+  margin: 20px; /* Add some margin around the section */
+}
+
+.section p {
+  font-size: 18px; /* Slightly decrease the font size for better readability */
+  line-height: 1.5; /* Increase line height for better spacing between lines */
+  color: #555; /* Use a darker color for the text */
+}
+
+.img {
+  display: block;
+  margin: 20px auto; /* Add margin to center the image and provide some space */
+  max-width: 100%; /* Make sure the image doesn't exceed its container width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for a lift effect */
+  border-radius: 8px; /* Add a border-radius for a rounded image */
+}

@@ -1,6 +1,8 @@
 // components/InsertVenue.js
 import React, { useState } from 'react';
 import { postData } from '@/utilities/fetching';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export default function InsertVenue() {
   // State variables to manage the input values
@@ -35,60 +37,32 @@ export default function InsertVenue() {
       <section id="admin-venues">
         <br />
         <p>Venue ID:</p>
-        <input
-          type="text"
-          placeholder="Add Venue"
-          value={venueId}
-          onChange={(e) => setVenueId(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="Venue ID" variant="outlined" onChange={(e) => setVenueId(e.target.value)} />
         <br />
         <br />
         <p>City:</p>
-        <input
-          type="text"
-          placeholder="Add Venue"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="City" variant="outlined" onChange={(e) => setCity(e.target.value)} />
         <br />
         <br />
         <p>Pincode:</p>
-        <input
-          type="text"
-          placeholder="Add Venue"
-          value={pincode}
-          onChange={(e) => setPincode(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="Pincode" variant="outlined" onChange={(e) => setPincode(e.target.value)} />
         <br />
         <br />
         <p>Location:</p>
-        <input
-          type="text"
-          placeholder="Add Venue"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="Location" variant="outlined" onChange={(e) => setLocation(e.target.value)} />
         <br />
         <br />
         <p>Venue Type:</p>
-        <input
-          type="text"
-          placeholder="Add Venue"
-          value={venueType}
-          onChange={(e) => setVenueType(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="Venue Type" variant="outlined" onChange={(e) => setVenueType(e.target.value)} />
         <br />
         <br />
         <p>Availability:</p>
-        <input
-          type="text"
-          placeholder="Add Venue"
-          value={availability}
-          onChange={(e) => setAvailability(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="Availability" variant="outlined" onChange={(e) => setAvailability(e.target.value)} />
         <br />
         <br />
-        <input type="submit" value="Submit" onClick={handleSubmit} />
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
       </section>
     </div>
   );

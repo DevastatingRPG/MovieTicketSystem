@@ -6,6 +6,8 @@ import Link from 'next/link';
 import Navbar from '@/components/navbar';
 import { postData } from '@/utilities/fetching';
 import { useRouter } from 'next/router';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function Login() {
   // State to manage the input values
@@ -44,32 +46,21 @@ function Login() {
         <h1>Enter login details</h1>
         <main className={styles.main}>
           <p>Enter your username:</p>
-          <input
-            type="text"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          <TextField id="outlined-basic" label="Username" variant="outlined" />
           <br />
           <br />
           <p>Enter your password:</p>
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <TextField id="outlined-basic" label="Password" variant="outlined" />
           <br />
           <br />
-          <input
-            className={styles.submitButton}
-            type="submit"
-            value="Submit"
-            onClick={handleSubmit}
-          />
-          <li className={styles.adminLoginBtn}>
-            <Link href="admin">Admin Login</Link>
-          </li>
+          <Button variant="contained" onClick={handleSubmit}>
+            Submit
+          </Button>
+          <br />
+          <br />
+          <Button variant="contained" onClick={() => window.location.href = "/admin"}>
+            Admin Login
+          </Button>
         </main>
       </div>
     </Layout>

@@ -32,6 +32,7 @@ function MovieTicketBookingSystem() {
         <h1 className={styles.title}>
           <u>MOVIE TICKET BOOKING SYSTEM</u>
         </h1>
+        <br />
         <main>
           <section id={styles.intro} className={styles.section}>
             <p>

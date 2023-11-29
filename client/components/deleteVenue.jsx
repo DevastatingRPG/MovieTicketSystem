@@ -1,6 +1,8 @@
 // components/DeleteVenue.js
 import React, { useState } from 'react';
 import { postData } from '@/utilities/fetching';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export default function DeleteVenue() {
   // State variable to manage the input value
@@ -23,15 +25,12 @@ export default function DeleteVenue() {
       <section id="admin-venues">
         <br />
         <p>Venue ID:</p>
-        <input
-          type="text"
-          placeholder="Delete Venue"
-          value={venueId}
-          onChange={(e) => setVenueId(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="Venue ID" variant="outlined" onChange={(e) => setVenueId(e.target.value)} />
         <br />
         <br />
-        <input type="submit" value="Submit" onClick={handleSubmit} />
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
       </section>
     </div>
   );

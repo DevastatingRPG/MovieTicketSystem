@@ -3,6 +3,12 @@ import styles from 'styles/signup.module.css'; // Import the local styles
 import Layout from '../components/layout';
 import { postData } from '@/utilities/fetching';
 import { useRouter } from 'next/router';
+import Button from '@mui/material/Button';
+import { TextField, Select } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import { Form } from 'react-hook-form';
+import InputLabel from '@mui/material/InputLabel';
 
 function SignUp() {
   const router = useRouter();
@@ -29,10 +35,10 @@ function SignUp() {
     console.log('Form Data:', formData);
     try {
       const response = await postData('/register', formData);
-      if (response.data == "OK"){
+      if (response.data == "OK") {
         router.replace('/login');
       }
-      else{
+      else {
         alert(response.data);
       }
     }
@@ -51,74 +57,50 @@ function SignUp() {
           <section className={styles.form} id="signin">
             <form onSubmit={handleSubmit}>
               <p>Enter your name:</p>
-              <input
-                type="text"
-                placeholder="Enter Name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
+              <TextField id="outlined-basic" label="Name" variant="outlined" />
               <br />
               <br />
               <p>Enter your email:</p>
-              <input
-                type="text"
-                placeholder="Enter Email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange} />
+              <TextField id="outlined-basic" label="Email" variant="outlined" />
               <br />
               <br />
               <p>Enter username:</p>
-              <input
-                type="text"
-                placeholder="Enter Username"
-                name="uname"
-                value={formData.uname}
-                onChange={handleChange} />
+              <TextField id="outlined-basic" label="Username" variant="outlined" />
               <br />
               <br />
               <p>Enter a password:</p>
-              <input
-                type="password"
-                placeholder="Enter Password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange} />
+              <TextField id="outlined-basic" label="Password" variant="outlined" />
               <br />
               <br />
               <p>Enter your age:</p>
-              <input
-                type="text"
-                placeholder="Enter Age"
-                name="age"
-                value={formData.age}
-                onChange={handleChange} />
+              <TextField id="outlined-basic" label="Age" variant="outlined" />
               <br />
               <br />
               <p>Enter your contact number:</p>
-              <input
-                type="text"
-                placeholder="Enter contact number"
-                name="mobile"
-                value={formData.mobile}
-                onChange={handleChange} />
+              <TextField id="outlined-basic" label="Contact Number" variant="outlined" />
               <br />
               <br />
               <p>Select your gender:</p>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-              >
-                <option value="">Select gender</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-                <option value="O">Others</option>
-              </select>
+              <FormControl sx={{ m: 1, minWidth: 100 }}>
+                <InputLabel id="demo-simple-select-autowidth-label">Gender</InputLabel>
+                <Select
+                  labelId="demo-simple-select-autowidth-label"
+                  id="demo-simple-select-autowidth"
+                  autoWidth
+                  label="Gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={"Male"}>Male</MenuItem>
+                  <MenuItem value={"Female"}>Female</MenuItem>
+                  <MenuItem value={"Others"}>Others</MenuItem>
+                </Select>
+              </FormControl>
               <br />
               <br />
-              <input type="submit" value="Submit" id="submit" />
+              <Button variant="contained" onClick={handleSubmit}>
+                Submit
+              </Button>
             </form>
           </section>
           <section className={styles.login_section} id="login">

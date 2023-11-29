@@ -1,6 +1,8 @@
 // components/DeleteShow.js
 import { postData } from '@/utilities/fetching';
 import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export default function DeleteShow() {
   // State to manage the input value
@@ -23,15 +25,12 @@ export default function DeleteShow() {
       <section id="admin-venues">
         <br />
         <p>Show ID:</p>
-        <input
-          type="text"
-          placeholder="Delete Venue"
-          value={showId}
-          onChange={(e) => setShowId(e.target.value)}
-        />
+        <TextField id="outlined-basic" label="Show ID" variant="outlined" onChange={(e) => setShowId(e.target.value)} />
         <br />
         <br />
-        <input className="styles.in" type="submit" value="Submit" onClick={handleSubmit} />
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
       </section>
     </div>
   );

@@ -3,6 +3,7 @@ import styles from 'styles/movies.module.css'; // Import the local styles
 import Layout from '../components/layout';
 import { fetchData } from '@/utilities/fetching';
 import Link from 'next/link';
+import Button from '@mui/material/Button';
 
 function MoviesList() {
   // Placeholder movie data until fetched from the backend
@@ -58,9 +59,9 @@ function MoviesList() {
         )}
         <p>Click here to proceed with booking</p>
         <br />
-        <button className={styles.bookingButton} onClick={() => window.location.href = "/booking"}>
+        <Button variant="contained" onClick={() => window.location.href = "/booking"}>
           Bookings
-        </button>
+        </Button>
       </div>
     </Layout>
   );
