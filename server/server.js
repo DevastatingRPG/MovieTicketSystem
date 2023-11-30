@@ -32,7 +32,7 @@ app.post('/admin', (req, res) => {
             query = `CALL InsertVenue(${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
             break;
         case 'insshow':
-            query = `CALL InsertShow(${sid}, \'${name}\', \'${trailer}\', \'${stype}\', \'${timing}\', \'${image}\')`;
+            query = `CALL InsertShow(${sid}, \'${name}\', \'${trailer}\', \'${stype}\', \'${image}\')`;
             break;
         case 'delvenue':
             query = `DELETE FROM venue WHERE vid=${vid}`;
@@ -117,17 +117,17 @@ app.post('/booking', (req, res) => {
     switch (func) {
         case 'insert':
             var bid;
-            // query = `CALL InsertBooking(${uid}, ${sid}, \'${pmeth}\', ${amount}, \'Y\', @bid);`
-            query = `CALL InsertBooking(1, 20, \'${pmeth}\', ${amount}, \'Y\', @bid); SELECT @bid`
+            query = `CALL InsertBooking(${uid}, ${sid}, \'${pmeth}\', ${amount}, \'Y\', @bid);SELECT @bid;`
 
             connection.query(query, async (err, rows, fields) => {
                 if (err) {
                     console.error(err);
                 }
+                console.log(rows);
                 bid = rows[1][0]["@bid"]
                 for (let seat of seats) {
                     await new Promise((resolve, reject) => {
-                        connection.query(`CALL InsertTicket(${bid}, 3,\'${timing}\', ${seat})`, (err, rows, fields) => {
+                        connection.query(`CALL InsertTicket(${bid}, ${vid},\'${timing}\', ${seat})`, (err, rows, fields) => {
                             if (err) {
                                 console.error(err);
                                 reject(err);
@@ -141,14 +141,11 @@ app.post('/booking', (req, res) => {
 
             break;
     }
-
-
-
 });
 
 app.post('/login', (req, res) => {
     const { uname, password } = req.body;
-    const query = `CALL VerifyUserCredentials(\'${uname}\', \'${password}\', @verified, @error); SELECT @verified, @error;`;
+    const query = `CALL VerifyUserCredentials(\'${uname}\', \'${password}\', @verified, @error, @uid); SELECT @verified, @error, @uid;`;
     connection.query(query, (err, rows, fields) => {
         if (err) {
             console.error(err);
@@ -157,9 +154,10 @@ app.post('/login', (req, res) => {
         let result = rows[1][0];
         let verified = result["@verified"];
         let error = result["@error"];
+        let uid = result["@uid"];
         if (verified) {
             const token = jwt.sign({ uname }, JWT_SECRET_KEY, { expiresIn: '30d' });
-            res.json({ token, message: 'Login successful' });
+            res.json({ token, message: 'Login successful', uid });
         }
         else {
             res.send(error);

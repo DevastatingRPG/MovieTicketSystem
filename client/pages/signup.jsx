@@ -46,7 +46,6 @@ function SignUp() {
                                     <TextField {...field} id="outlined-basic" label="Name" variant="outlined" />
                                 )}
                             />
-                            {/* <TextField id="outlined-basic" label="Name" variant="outlined" /> */}
                             <br />
                             <br />
                             <p>Enter your email:</p>
@@ -57,7 +56,6 @@ function SignUp() {
                                     <TextField {...field} id="outlined-basic" label="Email" variant="outlined" />
                                 )}
                             />
-                            {/* <TextField id="outlined-basic" label="Email" variant="outlined" /> */}
                             <br />
                             <br />
                             <p>Enter username:</p>
@@ -68,7 +66,6 @@ function SignUp() {
                                     <TextField {...field} id="outlined-basic" label="Username" variant="outlined" />
                                 )}
                             />
-                            {/* <TextField id="outlined-basic" label="Username" variant="outlined" /> */}
                             <br />
                             <br />
                             <p>Enter a password:</p>
@@ -79,7 +76,6 @@ function SignUp() {
                                     <TextField {...field} id="outlined-basic" label="Password" variant="outlined" type='password' />
                                 )}
                             />
-                            {/* <TextField id="outlined-basic" label="Password" variant="outlined" /> */}
                             <br />
                             <br />
                             <p>Enter your age:</p>
@@ -90,7 +86,6 @@ function SignUp() {
                                     <TextField {...field} id="outlined-basic" label="Age" variant="outlined" />
                                 )}
                             />
-                            {/* <TextField id="outlined-basic" label="Age" variant="outlined" /> */}
                             <br />
                             <br />
                             <p>Enter your contact number:</p>
@@ -101,7 +96,6 @@ function SignUp() {
                                     <TextField {...field} id="outlined-basic" label="Mobile" variant="outlined" />
                                 )}
                             />
-                            {/* <TextField id="outlined-basic" label="Contact Number" variant="outlined" /> */}
                             <br />
                             <br />
                             <p>Select your gender:</p>

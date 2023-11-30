@@ -6,25 +6,6 @@ import { fetchData } from '../utilities/fetching'
 import Image from 'next/image';
 
 function MovieTicketBookingSystem() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const test = async () => {
-      try {
-        let response = await fetchData('/booking?func=list');
-        setData(response);
-      }
-      catch (err) {
-        console.error(err);
-      }
-    }
-
-    test()
-    
-  }, [])
-
-  console.log(data)
-
   return (
     <Layout>
       <div>

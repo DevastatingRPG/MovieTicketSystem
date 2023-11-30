@@ -20,7 +20,7 @@ function Login() {
             const response = await postData('/login', data);
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('uid', data.uname);
+                localStorage.setItem('uid', response.data.uid);
                 router.replace('/')
             }
             else {
