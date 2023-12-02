@@ -5,8 +5,7 @@ import { fetchData, postData } from '@/utilities/fetching';
 import { useRouter } from 'next/router';
 import Seats from '../components/seats';
 import { useForm, Controller } from 'react-hook-form';
-
-
+import { FormControl, InputLabel, Select, MenuItem, TextField, Button } from '@mui/material';
 
 function BookingForm() {
     const { register, handleSubmit, control, watch, setValue } = useForm();
@@ -121,108 +120,160 @@ function BookingForm() {
 
     return (
         <Layout>
-            {filteredMovies ? (
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <section>
-                        <p>Select the movie</p>
-                        <select {...register('sid')}>
-                            <option value="">Select a movie</option>
-                            {filteredMovies.map((movie) => (
-                                <option key={movie.SID} value={movie.SID}>
-                                    {movie.name}
-                                </option>
-                            ))}
-                        </select>
-                        <p>Select the venue:</p>
-                        <select {...register('vid')}>
-                            <option value="">Select a venue</option>
-                            {filteredVenues.map((venue) => (
-                                <option key={venue.VID} value={venue.VID}>
-                                    {venue.location}
-                                </option>
-                            ))}
-                        </select>
-                    </section>
-
-                    <section>
-                        <p>Select the seat you want:</p>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <section className={styles.booking}>
+                    <p>Select the movie</p>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a movie</InputLabel>
                         <Controller
-                            name="seats"
+                            name="sid"
                             control={control}
-                            defaultValue={selectedSeats}
                             render={({ field }) => (
-                                <Seats occupiedSeats={booked} setSelectedSeats={setSelectedSeats} selectedSeats={selectedSeats} />
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a movie
+                                    </MenuItem>
+                                    {movies.map((movie) => (
+                                        <MenuItem key={movie.SID} value={movie.SID}>
+                                            {movie.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
                             )}
                         />
-                        <p>Enter the date you want to watch the movie:</p>
-                        <input
-                            type="date"
-                            placeholder="Date"
-                            {...register('selectedDate')}
+                    </FormControl>
+
+                    <p>Select the venue:</p>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a venue</InputLabel>
+                        <Controller
+                            name="vid"
+                            control={control}
+                            render={({ field }) => (
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a venue
+                                    </MenuItem>
+                                    {venues.map((venue) => (
+                                        <MenuItem key={venue.VID} value={venue.VID}>
+                                            {venue.location}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            )}
                         />
-                        <p>Select your show timing:</p>
-                        <select {...register('selectedTime')}>
-                            <option value="" disabled>
-                                Select a timing
-                            </option>
-                            {showTimings.map((timing) => (
-                                <option key={timing} value={timing}>
-                                    {timing}
-                                </option>
-                            ))}
-                        </select>
-                    </section>
+                    </FormControl>
 
-                    <section>
-                        <p>Please select your method of payment</p>
-                        <select {...register('pmeth')}>
-                            <option value="" disabled>
-                                Select a payment method
-                            </option>
-                            {paymentMethods.map((method) => (
-                                <option key={method} value={method}>
-                                    {method}
-                                </option>
-                            ))}
-                        </select>
-                        {selectedPaymentMethod && (
-                            <div>
-                                {selectedPaymentMethod === 'Card' && (
-                                    <div>
-                                        <label htmlFor="cardNumber">Card Number:</label>
-                                        <input type="text" {...register('cardNumber')} />
-                                        <label htmlFor="cardHolderName">Card Holder Name:</label>
-                                        <input type="text" {...register('cardHolderName')} />
-                                        <label htmlFor="expirationDate">Expiration Date:</label>
-                                        <input
-                                            type="text"
-                                            placeholder="MM/YYYY"
-                                            {...register('expirationDate')}
-                                        />
-                                        <label htmlFor="cvv">CVV:</label>
-                                        <input type="text" {...register('cvv')} />
-                                        <button type="submit">
-                                            Submit Payment
-                                        </button>
-                                    </div>
-                                )}
-                                {selectedPaymentMethod === 'UPI' && (
-                                    <div>
-                                        <label htmlFor="upiID">UPI ID:</label>
-                                        <input type="text" {...register('upiID')} />
-                                        <button type="submit">
-                                            Submit Payment
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
+                    <p>Select the seat you want:</p>
+                    <Controller
+                        name="seats"
+                        control={control}
+                        render={({ field }) => (
+                            <Seats
+                                occupiedSeats={[10, 12, 14]}
+                                setSelectedSeats={setSelectedSeats}
+                                selectedSeats={selectedSeats}
+                            />
                         )}
-                    </section>
-                </form>
-            ) :
-                (<p>Loading</p>)
-            }
+                    />
 
+                    <p>Enter the date you want to watch the movie:</p>
+                    <TextField
+                        type="date"
+                        placeholder="Date"
+                        {...register('selectedDate')}
+                    />
+
+                    <p>Select your show timing:</p>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a timing</InputLabel>
+                        <Controller
+                            name="selectedTime"
+                            control={control}
+                            render={({ field }) => (
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a timing
+                                    </MenuItem>
+                                    {showTimings.map((timing) => (
+                                        <MenuItem key={timing} value={timing}>
+                                            {timing}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            )}
+                        />
+                    </FormControl>
+
+                    <p>Please select your method of payment</p>
+                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                        <InputLabel>Select a payment method</InputLabel>
+                        <Controller
+                            name="pmeth"
+                            control={control}
+                            render={({ field }) => (
+                                <Select {...field}>
+                                    <MenuItem value="">
+                                        Select a payment method
+                                    </MenuItem>
+                                    {paymentMethods.map((method) => (
+                                        <MenuItem key={method} value={method}>
+                                            {method}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            )}
+                        />
+                    </FormControl>
+
+                    {selectedPaymentMethod && (
+                        <div>
+                            {selectedPaymentMethod === 'Card' && (
+                                <div>
+                                    <br/>
+                                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                                    <TextField label="Card Number" {...register('cardNumber')} />
+                                    <br />
+                                    <br/>
+                                    <TextField
+                                        label="Card Holder Name"
+                                        {...register('cardHolderName')}
+                                    />
+                                    <br/>
+                                    <br/>
+                                    <TextField
+                                        label="Expiration Date"
+                                        placeholder="MM/YYYY"
+                                        {...register('expirationDate')}
+                                    />
+                                    <br/>
+                                    <br/>
+                                    <TextField label="CVV" {...register('cvv')} />
+                                    </FormControl>
+                                    <br/>
+                                    <br/>
+                                    <Button type="submit" variant="contained" color="primary">
+                                        Submit Payment
+                                    </Button>
+                                </div>
+                            )}
+                            {selectedPaymentMethod === 'UPI' && (
+                                <div>
+                                    <br/>
+                                    <FormControl sx={{ m: 1, minWidth: 300 }}>
+                                    <TextField label="UPI ID" {...register('upiID')} />
+                                    </FormControl>
+                                    <br/>
+                                    <br/>
+                                    <Button type="submit" variant="contained" color="primary">
+                                        Submit Payment
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </section>
+            </form>
         </Layout>
     );
 }
