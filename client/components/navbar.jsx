@@ -11,7 +11,7 @@ function Navbar() {
             <div className={styles.navbar_right}>
                 <ul>
                     <li>
-                        <Link href="/signup">Sign-up/Log-in</Link>
+                        <Link href="/signup">Sign-up/Login</Link>
                     </li>
                     <li>
                         <Link href="/movies">Shows</Link>

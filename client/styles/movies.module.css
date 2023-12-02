@@ -1,29 +1,27 @@
-/* MoviesList.module.css */
-
 .container {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .movie {
-    margin-bottom: 20px;
-  }
-  
-  .movie p {
-    margin-bottom: 8px;
-  }
-  
-  .movie img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .booking-link {
-    margin-top: 20px;
-  }
-  
-  .booking-link a {
-    text-decoration: underline;
-    color: #007bff;
-  }
-  
+  text-align: center;
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.movie {
+  margin-bottom: 20px;
+}
+
+.movie p {
+  margin-bottom: 8px;
+}
+
+.movie img {
+  max-width: 100%;
+  height: auto;
+}
+
+.bookingButton {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+}

@@ -1,37 +1,30 @@
 // components/DeleteShow.js
 import { postData } from '@/utilities/fetching';
 import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Controller } from 'react-hook-form';
 
-export default function DeleteShow() {
+export default function DeleteShow({ control }) {
   // State to manage the input value
-  const [showId, setShowId] = useState('');
-
-  // Function to handle form submission
-  const handleSubmit = async () => {
-    // Log the input value to the console
-    try {
-      const response = await postData('/admin?func=delshow', { sid: showId });
-    }
-    catch (err) {
-      console.error("Error Deleting Show : ", err)
-    }
-    // You can add additional logic here, such as sending the data to a server
-  };
 
   return (
     <div>
       <section id="admin-venues">
         <br />
         <p>Show ID:</p>
-        <input
-          type="text"
-          placeholder="Delete Venue"
-          value={showId}
-          onChange={(e) => setShowId(e.target.value)}
+        <Controller
+          name="sid"
+          control={control}
+          render={({ field }) => (
+            <TextField {...field} id="outlined-basic" label="Show ID" variant="outlined" />
+          )}
         />
         <br />
         <br />
-        <input type="submit" value="Submit" onClick={handleSubmit} />
+        <Button variant="contained" type='submit'>
+          Submit
+        </Button>
       </section>
     </div>
   );

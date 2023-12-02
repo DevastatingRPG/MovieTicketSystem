@@ -1,45 +1,30 @@
-/* SignUp.module.css */
-
 .container {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form p {
-    margin-bottom: 8px;
-  }
-  
-  .form input,
-  .form select {
-    margin-bottom: 16px;
-    padding: 8px;
-  }
-  
-  .form input[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .form input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
-  .login_section {
-    margin-top: 20px;
-  }
-  
-  .login_section p {
-    margin-bottom: 8px;
-  }
-  
-  .login_section a {
-    text-decoration: underline;
-    color: #007bff;
-  }
-  
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+.form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form p {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.login_section {
+  margin-top: 20px;
+}
+
+.login_section p {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.login_section a {
+  text-decoration: underline;
+  color: #007bff;
+  font-weight: bold;
+}
