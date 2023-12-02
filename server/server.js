@@ -24,12 +24,12 @@ const connection = mysql.createConnection({
 app.post('/admin', (req, res) => {
     let query;
     const { func } = req.query;
-    const { vid, city, pincode, location, vtype, avail,
-        sid, name, trailer, stype, timing, image } = req.body;
+    const { vid, city, pincode, location, avail,
+        sid, name, trailer, stype, image } = req.body;
     // Stype is category'Action\',_utf8mb4\'Drama\',_utf8mb4\'Comedy\',_utf8mb4\'Thriller\',_utf8mb4\'Other\
     switch (func) {
         case 'insvenue':
-            query = `CALL InsertVenue(${vid}, \'${city}\', ${pincode}, \'${location}\', \'${vtype}\', \'${avail}\')`;
+            query = `CALL InsertVenue(${vid}, \'${city}\', ${pincode}, \'${location}\', \'${avail}\')`;
             break;
         case 'insshow':
             query = `CALL InsertShow(${sid}, \'${name}\', \'${trailer}\', \'${stype}\', \'${image}\')`;

@@ -60,16 +60,6 @@ export default function InsertVenue({ control }) {
                 />
                 <br />
                 <br />
-                <p>Venue Type:</p>
-                <Controller
-                    name="vtype"
-                    control={control}
-                    render={({ field }) => (
-                        <TextField {...field} id="outlined-basic" label="Venue Type" variant="outlined" />
-                    )}
-                />
-                <br />
-                <br />
                 <p>Availability:</p>
                 <Controller
                     name="avail"

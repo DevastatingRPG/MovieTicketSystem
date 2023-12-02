@@ -33,6 +33,16 @@ function Login() {
         }
     };
 
+    const handleAdmin = () => {
+        var password = prompt("Enter Admin Password : ");
+        if (password == 'beans123'){
+            router.push('/admin');
+        }
+        else{
+            alert("Incorrect password");
+        }
+    }
+
 
     return (
         <Layout>
@@ -67,7 +77,7 @@ function Login() {
                         </Button>
                         <br />
                         <br />
-                        <Button variant="contained" onClick={() => window.location.href = "/admin"}>
+                        <Button variant="contained" onClick={handleAdmin}>
                             Admin Login
                         </Button>
                     </form>
