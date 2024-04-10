@@ -26,6 +26,12 @@ const Nav = () => {
             case 'home':
                 path = '/';
                 break;
+            case 'shows':
+                path = '/movies';
+                break;
+            case 'booking':
+                path = '/booking';
+                break;
         }
         router.push(path);
     };

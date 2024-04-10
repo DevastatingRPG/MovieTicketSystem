@@ -17,7 +17,7 @@ const Home = () => {
             <Card className="w-full max-w-3xl mx-auto mt-10">
                 <CardHeader className="p-4 flex flex-col items-center">
                     {/* <Text> */}
-                    <p h1 className="text-center  mt-4">MOVIE TICKET BOOKING SYSTEM</p>
+                    <p className="text-center  mt-4">MOVIE TICKET BOOKING SYSTEM</p>
                     <br/>
                     <p className="text-center  mt-4">
                         Welcome to the next frontier in cinematic convenience – our online movie ticket booking system!

@@ -8,10 +8,7 @@ import Nav from "@/app/components/navbar";
 const Signup = () => {
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log('submitted')
 
-        // router.replace('/')
         event.preventDefault();
         //
         const formData = new FormData(event.target);

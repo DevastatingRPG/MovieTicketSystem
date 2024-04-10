@@ -18,14 +18,12 @@ const RootLayout = ({ children }) => {
                 <title>Home Page</title>
             </head>
             <header></header>
-            <body>
-        {/* //         <main> */}
-                    <Suspense fallback={<Loading />}>
-                        <Providers>
-                            {children}
-                        </Providers>
-                    </Suspense>
-        {/* //         </main> */}
+            <body className={inter.className}>
+                <Suspense fallback={<Loading />}>
+                    <Providers>
+                        {children}
+                    </Providers>
+                </Suspense>
             </body>
             <footer></footer>
         </html>
