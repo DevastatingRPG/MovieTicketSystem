@@ -16,21 +16,20 @@ const Login = () => {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const uname = formData.get('uname');
-        const password = formData.get('password');
+        const data = Object.fromEntries(formData.entries());
         const response = await fetch('/api/login', {
             method: 'POST',
-            body: JSON.stringify({ uname, password }),
+            body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        const data = await response.json();
+        const responseData = await response.json();
 
         if (response.ok) {
             // Redirect to the home page
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('uid', data.uid);
+            localStorage.setItem('token', responseData.token);
+            localStorage.setItem('uid', responseData.uid);
             router.replace('/');
         } else {
             // Show error message
@@ -40,6 +39,7 @@ const Login = () => {
     const adminLogin = () => {
         var password = prompt("Enter Admin Password : ");
         if (password == 'beans123') {
+            localStorage.setItem('admin', 1);
             router.push('/admin');
         }
         else {
@@ -57,7 +57,7 @@ const Login = () => {
                 <Input type="password" name="password" label="Password" placeholder="Password" isRequired />
                 <div className="flex justify-between mb-2">
                     <Button className="w-full mr-2" type="submit">Login</Button>
-                    <Button className="w-full ml-2">Admin Login</Button>
+                    <Button className="w-full ml-2" onClick={adminLogin}>Admin Login</Button>
                 </div>
 
 

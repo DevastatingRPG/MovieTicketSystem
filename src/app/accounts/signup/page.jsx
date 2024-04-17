@@ -12,15 +12,7 @@ const Signup = () => {
         event.preventDefault();
         //
         const formData = new FormData(event.target);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            age: formData.get('age'),
-            gender: formData.get('gender'),
-            mobile: formData.get('mobile'),
-            uname: formData.get('uname'),
-            password: formData.get('password'),
-        };
+        const data = Object.fromEntries(formData.entries());
         const response = await fetch('/api/register', {
             method: 'POST',
             body: JSON.stringify(data),

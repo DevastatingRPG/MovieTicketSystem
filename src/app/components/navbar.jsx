@@ -15,7 +15,6 @@ const Nav = () => {
 
     const handleRedirect = (linkData) => {
         let path;
-        console.log('linked')
         switch (linkData) {
             case 'login':
                 path = '/accounts/login';

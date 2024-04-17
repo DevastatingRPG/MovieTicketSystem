@@ -102,7 +102,7 @@ const MovieList = () => {
 
     const showSeats = async () => {
         try {
-            if (selectedMovie && selectedVenue) {
+            if (selectedMovie && selectedVenue && selectedDate && selectedTime) {
                 const response = await fetch(`/api/booking?func=occupied&sid=${selectedMovie}&vid=${selectedVenue}`);
                 const data = await response.json();
                 const stringArray = data.data[1][0]["@occupied"].split(',');
@@ -136,15 +136,10 @@ const MovieList = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const data = {
-            uid: uid,
-            vid: selectedVenue,
-            sid: selectedMovie,
-            pmeth: selectedPaymentMethod,
-            seats: selectedSeats,
-            timing: `${formData.get('date')} ${formData.get('timing')}:00`,
-            amount: selectedSeats.length * 300,
-        };
+        let data = Object.fromEntries(formData.entries());
+        data.seats = selectedSeats;
+        data.timing = `${data.date} ${data.timing}:00`;
+        data.amount = `${selectedSeats.length * 300}`;
         const response = await fetch('/api/booking', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -155,7 +150,7 @@ const MovieList = () => {
         if (response.ok) {
             // Redirect to the home page
             console.log('nice');
-            
+
         } else {
             console.log("OOps")
             // Show error message
@@ -203,6 +198,31 @@ const MovieList = () => {
                                     </SelectItem>
                                 )}
                             </Select>
+                            <div className="flex justify-between mb-4">
+                                <Input
+                                    label="Date"
+                                    type="date"
+                                    className="w-full mr-2"
+                                    value={selectedDate}
+                                    name="date"
+                                    onChange={(event) => setSelectedDate(event.target.value)}
+                                />
+                                <Select isRequired
+                                    name="timing"
+                                    label="Timing"
+                                    items={showTimings}
+                                    value={selectedTime}
+                                    onChange={(event) => setSelectedTime(event.target.value)}
+                                    placeholder="Select a Timing"
+                                    className="w-full ml-2"
+                                >
+                                    {(timing) => (
+                                        <SelectItem key={timing.value} value={timing.value}>
+                                            {timing.label}
+                                        </SelectItem>
+                                    )}
+                                </Select>
+                            </div>
                             <div className="flex justify-between mb-2">
                                 <Button onClick={reset} className="w-full mr-2">Reset</Button>
                                 <Button onClick={showSeats} className="w-full ml-2">Show</Button>
@@ -218,21 +238,6 @@ const MovieList = () => {
                                     selectedSeats={selectedSeats}
                                     className="mb-4"
                                 />
-                                <Input type="date" className="mb-4" name="date"/>
-                                <Select isRequired
-                                    name="timing"
-                                    label="Timing"
-                                    items={showTimings}
-                                    value={selectedTime}
-                                    placeholder="Select a Timing"
-                                    className="mb-4"
-                                >
-                                    {(timing) => (
-                                        <SelectItem key={timing.value} value={timing.value}>
-                                            {timing.label}
-                                        </SelectItem>
-                                    )}
-                                </Select>
                                 <Select isRequired
                                     name="pmeth"
                                     label="Payment Method"
