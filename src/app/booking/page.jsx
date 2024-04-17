@@ -152,7 +152,7 @@ const MovieList = () => {
             console.log('nice');
 
         } else {
-            console.log("OOps")
+            console.log("Oops")
             // Show error message
         }
     }
