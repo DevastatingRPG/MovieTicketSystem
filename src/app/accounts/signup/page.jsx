@@ -69,11 +69,9 @@ const Signup = () => {
 
         if (response.ok) {
             // Redirect to the home page
-            console.log('nice');
             router.push('/accounts/login')
 
         } else {
-            console.log("OOps")
             // Show error message
         }
     };

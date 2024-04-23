@@ -12,7 +12,7 @@ export async function POST(req, res){
         response = NextResponse.json({ message: "Success!" });
     }
     catch(e){
-        console.log(e)
+        console.error(e)
         response = NextResponse.json({ message: "Error!" }, { status: 500 });
         return response;
     }

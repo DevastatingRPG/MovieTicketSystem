@@ -80,8 +80,6 @@ export default function BookingTable() {
             });
             const rows = await response.json();
             setBookings(rows['data'][0]);
-
-            console.log(rows['data'][0])
         }
         catch (err) {
             console.error("Error fetching Bookings : ", err);
@@ -95,7 +93,6 @@ export default function BookingTable() {
 
     const handleDelete = async (bid) => {
         // Implement your delete logic here
-        console.log("Delete booking with key:", bid);
         const data = { bid };
         try {
             const response = await fetch('/api/delBookings', {
@@ -106,11 +103,9 @@ export default function BookingTable() {
                 }
             });
             if (response.ok) {
-                console.log("Deleted booking");
                 setBookings(bookings.filter(booking => booking.BID !== bid));
             }
             else {
-                console.log("error");
             }
         }
         catch(e){

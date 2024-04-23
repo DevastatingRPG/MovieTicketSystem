@@ -27,7 +27,6 @@ const DeleteUser = () => {
                 onOpen();
 
             } else {
-                console.log("OOps")
                 // Show error message
             }
         }

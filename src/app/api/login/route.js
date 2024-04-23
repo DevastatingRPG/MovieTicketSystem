@@ -30,7 +30,7 @@ export async function POST(req, res) {
             });
             response = NextResponse.json({ token, message: "Success!", uid });
         } else {
-            console.log(error);
+            console.error(error);
             response = NextResponse.json(
                 { message: "Invalid Details!" },
                 { status: 400 }

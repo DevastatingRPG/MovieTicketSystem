@@ -42,7 +42,18 @@ const MovieList = () => {
             console.error("Error fetching Movie and Venues : ", err);
         }
         let id = localStorage.getItem('uid');
-        if (id) {
+        const token = localStorage.getItem('token');
+
+        const data = {token};
+        const response = await fetch('/api/verify', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
             setUID(localStorage.getItem('uid'));
         }
         else {
@@ -104,7 +115,6 @@ const MovieList = () => {
             if (selectedMovie && selectedVenue && selectedDate && selectedTime) {
                 const response = await fetch(`/api/booking?func=occupied&sid=${selectedMovie}&vid=${selectedVenue}`);
                 const data = await response.json();
-                console.log(data);
                 const bookedSeats = data.data[1][0]["@occupied"];
                 let intArray;
                 if (bookedSeats) {
@@ -162,7 +172,6 @@ const MovieList = () => {
             router.reload();
 
         } else {
-            console.log("Oops")
             // Show error message
         }
     }

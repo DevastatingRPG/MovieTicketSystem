@@ -33,7 +33,7 @@ const Login = () => {
             localStorage.setItem('uid', responseData.uid);
             router.replace('/');
         } else {
-            // Show error message
+            
         }
     };
 

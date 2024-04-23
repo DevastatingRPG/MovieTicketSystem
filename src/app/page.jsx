@@ -6,9 +6,7 @@ import { Card, CardHeader, CardBody, Container, Grid, Image, Text } from '@nextu
 import Nav from "./components/navbar";
 
 const Home = () => {
-    console.log("Home")
     function handle(event) {
-        console.log("clicked");
         event.preventDefault();
     }
     return (

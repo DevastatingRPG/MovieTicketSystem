@@ -19,9 +19,6 @@ const MovieList = () => {
         if (data) {
             setMovies(data.data)
         }
-        console.log(response);
-        console.log(data.data);
-        console.log(Array.isArray(data[0]))
     }
 
     useEffect(() => {

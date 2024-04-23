@@ -38,7 +38,6 @@ const MovieList = () => {
             setSelectedFunc(null);
 
         } else {
-            console.log("OOps")
             // Show error message
         }
     }
