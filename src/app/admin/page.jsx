@@ -15,6 +15,13 @@ const MovieList = () => {
     const [selectedFunc, setSelectedFunc] = useState(null);
     const router = useRouter()
 
+    useEffect(() => {
+        const admin = localStorage.getItem('admin');
+        if (!admin) {
+            router.push('/accounts/login');
+        }
+    }, [])
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -28,7 +35,7 @@ const MovieList = () => {
         });
         if (response.ok) {
             // Redirect to the home page
-            console.log('nice');
+            setSelectedFunc(null);
 
         } else {
             console.log("OOps")
@@ -54,52 +61,61 @@ const MovieList = () => {
     return (
         <RootLayout>
             <Nav />
-            <form onSubmit={handleSubmit}>
-                <Select isRequired
-                    items={adminFuncs}
-                    label="Operation"
-                    name="func"
-                    onChange={(value) => setSelectedFunc(value.target.value)}
-                >
-                    {(op) => <SelectItem key={op.value}>{op.label}</SelectItem>}
-                </Select>
-                {selectedFunc == 'insvenue' && (
-                    <div>
-                        <Input isRequired name='vid' type="number" label='Venue ID' />
-                        <Input isRequired name='city' label='City' />
-                        <Input isRequired name='pincode' type="number" label='Pincode' />
-                        <Input isRequired name='location' label='Location' />
-                        <Input isRequired name='avail' label='Availability' />
-                    </div>
-
-                )}
-                {selectedFunc == 'insshow' && (
-                    <div>
-                        <Input isRequired name='sid' type="number" label='Show ID' />
-                        <Input isRequired name='name' label='Show Name' />
-                        <Select
-                            isRequired
-                            items={categories}
-                            name="stype"
-                            label='Category'>
-                            {(category) => (<SelectItem key='category.value'>{category.label}</SelectItem>)}
+            <Card className="w-full max-w-3xl mx-auto mt-10 mb-10 p-10">
+                <form onSubmit={handleSubmit}>
+                    <CardHeader>
+                        <Select isRequired
+                            items={adminFuncs}
+                            label="Operation"
+                            name="func"
+                            onChange={(value) => setSelectedFunc(value.target.value)}
+                        >
+                            {(op) => <SelectItem key={op.value}>{op.label}</SelectItem>}
                         </Select>
-                        <Input isRequired name='trailer' label='Trailer URL' />
-                        <Input isRequired name='image' label='Image URL' />
-                    </div>
-                )}
-                {selectedFunc == 'delvenue' && (
-                    <div>
-                        <Input isRequired name='vid' type="number" label='Venue ID' />
-                    </div>
-                )}
-                {selectedFunc == 'delshow' && (
-                    <div>
-                        <Input isRequired name='sid' type="number" label='Show ID' />
-                    </div>
-                )}
-                <Button type="submit">Proceed</Button>
-            </form>
+                    </CardHeader>
+
+                    {selectedFunc == 'insvenue' && (
+                        <CardBody className="space-y-4">
+                            <Input isRequired name='vid' type="number" label='Venue ID' />
+                            <Input isRequired name='city' label='City' />
+                            <Input isRequired name='pincode' type="number" label='Pincode' />
+                            <Input isRequired name='location' label='Location' />
+                            <Input isRequired name='avail' label='Availability' />
+                        </CardBody>
+
+                    )}
+                    {selectedFunc == 'insshow' && (
+                        <CardBody className="space-y-4">
+                            <Input isRequired name='sid' type="number" label='Show ID' />
+                            <Input isRequired name='name' label='Show Name' />
+                            <Select
+                                isRequired
+                                items={categories}
+                                name="stype"
+                                label='Category'>
+                                {(category) => (<SelectItem key='category.value'>{category.label}</SelectItem>)}
+                            </Select>
+                            <Input isRequired name='trailer' label='Trailer URL' />
+                            <Input isRequired name='image' label='Image URL' />
+                        </CardBody>
+                    )}
+                    {selectedFunc == 'delvenue' && (
+                        <CardBody>
+                            <Input isRequired name='vid' type="number" label='Venue ID' />
+                        </CardBody>
+                    )}
+                    {selectedFunc == 'delshow' && (
+                        <CardBody>
+                            <Input isRequired name='sid' type="number" label='Show ID' />
+                        </CardBody>
+                    )}
+                    <CardBody>
+                        <Button type="submit">Proceed</Button>
+                    </CardBody>
+
+                </form>
+            </Card>
+
 
 
         </RootLayout>

@@ -62,6 +62,7 @@ export async function POST(req, res) {
 
     let response;
     const values = [uid, sid, pmeth, amount];
+    console.log(values)
 
     try {
         const result = await connection.execute(

@@ -8,7 +8,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 const Providers = ({children}) =>{
     return (
         <NextUIProvider>
-            <NextThemesProvider attribute="class" defaultTheme="dark">
+            <NextThemesProvider attribute="class" forcedTheme="light">
                 {children}
             </NextThemesProvider>
         </NextUIProvider>

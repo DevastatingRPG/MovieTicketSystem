@@ -54,7 +54,8 @@ export async function POST(req, res) {
                 );
                 break;
             default:
-                return res.status(400).json({ message: "Invalid function" });
+                response = NextResponse.json({ message: "Invaid Function!" }, { status: 500 });
+                return response
         }
         response = NextResponse.json({ message: "Success!" });
     } catch (err) {

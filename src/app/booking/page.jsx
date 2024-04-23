@@ -1,10 +1,8 @@
 'use client'
-// import Image from "next/image";
 import RootLayout from "@/app/layout";
 import { useRouter } from 'next/navigation';
-// import { useCallback, useState } from 'react';
-import { Button, Input, Image, Card, CardHeader, Divider, CardBody, Select, SelectItem } from "@nextui-org/react";
-// import 
+import { Button, Input, Image, Card, CardHeader, Divider, CardBody, Select, SelectItem, DatePicker } from "@nextui-org/react";
+import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
 import Nav from "@/app/components/navbar";
 import { useState, useEffect, useRef } from "react";
 import Seats from "../components/seats";
@@ -98,6 +96,7 @@ const MovieList = () => {
         setFilteredVenues(venues);
         setShowDetails(false);
         setSelectedPaymentMethod(null);
+        router.reload();
     }
 
     const showSeats = async () => {
@@ -105,10 +104,19 @@ const MovieList = () => {
             if (selectedMovie && selectedVenue && selectedDate && selectedTime) {
                 const response = await fetch(`/api/booking?func=occupied&sid=${selectedMovie}&vid=${selectedVenue}`);
                 const data = await response.json();
-                const stringArray = data.data[1][0]["@occupied"].split(',');
-                const intArray = stringArray.map(numString => Number(numString));
+                console.log(data);
+                const bookedSeats = data.data[1][0]["@occupied"];
+                let intArray;
+                if (bookedSeats) {
+                    const stringArray = bookedSeats.split(',');
+                    intArray = stringArray.map(numString => Number(numString));
+                }
+                else {
+                    intArray = [];
+                }
                 setBooked(intArray);
                 setShowDetails(true);
+
             }
             else {
                 setBooked([]);
@@ -137,6 +145,7 @@ const MovieList = () => {
         event.preventDefault();
         const formData = new FormData(event.target);
         let data = Object.fromEntries(formData.entries());
+        data.uid = localStorage.getItem('uid');
         data.seats = selectedSeats;
         data.timing = `${data.date} ${data.timing}:00`;
         data.amount = `${selectedSeats.length * 300}`;
@@ -149,7 +158,8 @@ const MovieList = () => {
         });
         if (response.ok) {
             // Redirect to the home page
-            console.log('nice');
+            setShowDetails(false);
+            router.reload();
 
         } else {
             console.log("Oops")
@@ -167,7 +177,7 @@ const MovieList = () => {
                         <CardBody>
                             <Select isRequired
                                 ref={movieSelectRef}
-                                name="movie"
+                                name="sid"
                                 label="Movie"
                                 items={filteredMovies}
                                 value={selectedMovie}
@@ -184,7 +194,7 @@ const MovieList = () => {
 
                             <Select isRequired
                                 ref={venueSelectRef}
-                                name="venue"
+                                name="vid"
                                 label="Venue"
                                 items={filteredVenues}
                                 value={selectedVenue}
@@ -199,14 +209,19 @@ const MovieList = () => {
                                 )}
                             </Select>
                             <div className="flex justify-between mb-4">
-                                <Input
+                                <DatePicker
+                                    isRequired
                                     label="Date"
-                                    type="date"
+                                    name="date"
                                     className="w-full mr-2"
                                     value={selectedDate}
-                                    name="date"
-                                    onChange={(event) => setSelectedDate(event.target.value)}
+                                    onChange={setSelectedDate}
+                                    minValue={today(getLocalTimeZone()).add({ days: 1 })}
+                                    maxValue={today(getLocalTimeZone()).add({ days: 8 })}
+                                    defaultValue={today(getLocalTimeZone())}
                                 />
+
+
                                 <Select isRequired
                                     name="timing"
                                     label="Timing"
